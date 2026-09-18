@@ -72,6 +72,11 @@ export function Navbar({ logoUrl }: { logoUrl?: string | null }) {
     return pathname.startsWith(href);
   };
 
+  // The public website Navbar must NEVER render on /admin or any /admin/* route
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
+
   return (
     <>
       <header
