@@ -1,26 +1,372 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --theme-background: #0B0A09;
+  --theme-surface: #171513;
+  --theme-surface-secondary: #201D1A;
+  --theme-text-primary: #E9E6DF;
+  --theme-text-secondary: #A8A29E;
+  --theme-text-muted: #77716A;
+  --theme-border: rgba(233, 230, 223, 0.10);
+  --theme-border-subtle: rgba(233, 230, 223, 0.05);
+  --theme-accent: #8F3025;
+  --theme-accent-hover: #5C211C;
+  --theme-cta: #8F3025;
+  --theme-cta-text: #FFFFFF;
+  --theme-cta-hover: #5C211C;
+  --theme-overlay-bg: rgba(11, 10, 9, 1);
+  --theme-overlay-opacity: 0.58;
+  --theme-glass-bg: rgba(23, 21, 19, 0.45);
+  --theme-glass-border: rgba(233, 230, 223, 0.08);
+
+  --background: var(--theme-background);
+  --foreground: var(--theme-text-primary);
+  --wallpaper-overlay-opacity: var(--theme-overlay-opacity);
+
+  --color-bg: var(--theme-background);
+  --color-surface: var(--theme-surface);
+  --color-text: var(--theme-text-primary);
+  --color-text-muted: var(--theme-text-muted);
+  --color-accent: var(--theme-accent);
+  --color-accent-deep: var(--theme-accent-hover);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-background: var(--theme-background);
+  --color-foreground: var(--theme-text-primary);
+  --color-bg: var(--theme-background);
+  --color-surface: var(--theme-surface);
+  --color-text: var(--theme-text-primary);
+  --color-text-muted: var(--theme-text-muted);
+  --color-accent: var(--theme-accent);
+  --color-accent-deep: var(--theme-accent-hover);
+  --font-varsity: var(--font-varsity), serif;
+  --font-display: var(--font-varsity), serif;
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--theme-background);
+  color: var(--theme-text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  min-height: 100vh;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   PREMIUM FESTIVAL TRANSLUCENT GLASS & MATERIAL SYSTEM
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Hairline dividers */
+.hairline-divider {
+  border-top: 1px solid var(--theme-border);
+}
+
+.hairline-border {
+  border: 1px solid var(--theme-border);
+}
+
+/* Optical Translucent Glass Surfaces */
+.glass-surface,
+.surface-dark {
+  background: var(--theme-glass-bg);
+  backdrop-filter: blur(16px) saturate(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  border: 1px solid var(--theme-glass-border);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
+}
+
+.glass-card {
+  background: var(--theme-glass-bg);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  border: 1px solid var(--theme-glass-border);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: var(--theme-accent);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12), 0 12px 36px 0 rgba(0, 0, 0, 0.25);
+}
+
+.glass-pill {
+  background: var(--theme-glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--theme-glass-border);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel {
+  background: var(--theme-glass-bg);
+  backdrop-filter: blur(16px) saturate(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  border: 1px solid var(--theme-glass-border);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.07), 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+}
+
+.glass-countdown {
+  background: var(--theme-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--theme-glass-border);
+  border-radius: 4px;
+}
+
+.surface-dark-subtle {
+  background: var(--theme-surface-secondary);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--theme-border-subtle);
+}
+
+/* Minimalist Festival Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--theme-cta);
+  color: var(--theme-cta-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.6rem;
+  border-radius: 2px;
+  border: 1px solid var(--theme-cta);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--theme-cta-hover);
+  border-color: var(--theme-cta-hover);
+  color: var(--theme-cta-text);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2), 0 6px 20px rgba(0, 0, 0, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--theme-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--theme-text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.6rem;
+  border: 1px solid var(--theme-border);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  border-color: var(--theme-accent);
+  background-color: var(--theme-surface);
+  color: var(--theme-text-primary);
+  transform: translateY(-1px);
+}
+
+.glass-button {
+  background-color: #8F3025;
+  color: #E9E6DF;
+  border: 1px solid #8F3025;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.glass-button:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   ANIMATION & UTILITY CLASSES
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Scroll reveal utility classes for intentional scroll-actuation */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Modern sleek festival divider */
+.festival-divider,
+.broadsheet-divider,
+.broadsheet-divider-crimson {
+  border-top: 1px solid rgba(233, 230, 223, 0.08);
+}
+
+/* Utility to hide scrollbars on horizontal scroll rows */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   AUTONOMOUS INFINITE MARQUEE ANIMATIONS
+   Pure continuous loops independent of vertical scroll
+   ══════════════════════════════════════════════════════════════════ */
+
+@keyframes marquee-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee-events {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee-left 28s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-events:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-gallery {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee-right 40s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-gallery:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-cta {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee-left 25s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-cta:hover {
+  animation-play-state: paused;
+}
+
+/* Legacy ticker marquee */
+@keyframes ticker {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-ticker {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: ticker 35s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   YATHARTH FESTIVAL TYPOGRAPHY
+   ══════════════════════════════════════════════════════════════════ */
+
+.hero-main-title {
+  font-size: clamp(3.75rem, 13vw, 13rem);
+  text-transform: uppercase;
+  line-height: 0.9;
+  font-family: var(--font-varsity);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: #E9E6DF;
+  user-select: none;
+  transition: color 0.4s ease;
+}
+
+.ticker-display {
+  font-family: var(--font-varsity);
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+
+.bracket-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #77716A;
+}
+
+.varsity-piping {
+  border-color: #8F3025;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   REDUCED MOTION — Respect prefers-reduced-motion
+   ══════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker,
+  .animate-marquee-events,
+  .animate-marquee-gallery,
+  .animate-marquee-cta {
+    animation: none !important;
+    transform: none !important;
+  }
+  .reveal-init {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .glass-card,
+  .glass-card:hover,
+  .glass-button,
+  .glass-button:hover,
+  .glass-button:active,
+  .btn-primary,
+  .btn-ghost {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#181513" />
+      <stop offset="50%" stop-color="#0c0b0a" />
+      <stop offset="100%" stop-color="#08080a" />
+    </linearGradient>
+    <radialGradient id="glow2" cx="50%" cy="32%" r="45%">
+      <stop offset="0%" stop-color="#8F3025" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#8F3025" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="600" height="800" fill="url(#bg2)" />
+  <rect width="600" height="800" fill="url(#glow2)" />
+
+  <g stroke="#ffffff" stroke-opacity="0.04" stroke-width="1">
+    <line x1="40" y1="0" x2="40" y2="800" />
+    <line x1="560" y1="0" x2="560" y2="800" />
+    <line x1="0" y1="60" x2="600" y2="60" />
+    <line x1="0" y1="740" x2="600" y2="740" />
+  </g>
+
+  <rect x="40" y="60" width="520" height="680" fill="none" stroke="#8F3025" stroke-opacity="0.4" stroke-width="1.5" />
+
+  <text x="60" y="100" fill="#8F3025" font-family="'Courier New', monospace" font-size="12" font-weight="700" letter-spacing="4">PHOTOJOURNALISM</text>
+  <text x="540" y="100" text-anchor="end" fill="#77716A" font-family="'Courier New', monospace" font-size="11" letter-spacing="2">EVENT 02</text>
+  <line x1="60" y1="115" x2="540" y2="115" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1" />
+
+  <!-- Camera Aperture Motif -->
+  <g transform="translate(300, 240)">
+    <circle r="75" fill="#171513" stroke="#8F3025" stroke-width="2" />
+    <circle r="50" fill="none" stroke="#E9E6DF" stroke-width="1.5" />
+    <circle r="25" fill="#8F3025" opacity="0.8" />
+    <!-- Viewfinder brackets -->
+    <path d="M-60,-60 L-40,-60 M-60,-60 L-60,-40" stroke="#8F3025" stroke-width="2" fill="none" />
+    <path d="M60,-60 L40,-60 M60,-60 L60,-40" stroke="#8F3025" stroke-width="2" fill="none" />
+    <path d="M-60,60 L-40,60 M-60,60 L-60,40" stroke="#8F3025" stroke-width="2" fill="none" />
+    <path d="M60,60 L40,60 M60,60 L60,40" stroke="#8F3025" stroke-width="2" fill="none" />
+  </g>
+
+  <text x="300" y="380" text-anchor="middle" fill="#E9E6DF" font-family="'Georgia', serif" font-size="36" font-weight="900" letter-spacing="2">DRISHTIKON</text>
+  <text x="300" y="420" text-anchor="middle" fill="#8F3025" font-family="'Courier New', monospace" font-size="14" font-weight="700" letter-spacing="3">PHOTOJOURNALISM SHOWCASE</text>
+
+  <rect x="180" y="445" width="240" height="2" fill="#8F3025" />
+
+  <text x="300" y="490" text-anchor="middle" fill="#A8A29E" font-family="sans-serif" font-size="14">A high-stakes visual storytelling challenge capturing</text>
+  <text x="300" y="515" text-anchor="middle" fill="#A8A29E" font-family="sans-serif" font-size="14">candid street reality, human condition, and spot photo essays.</text>
+
+  <rect x="60" y="580" width="480" height="75" fill="#171513" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1" rx="2" />
+  <text x="90" y="612" fill="#77716A" font-family="'Courier New', monospace" font-size="10" letter-spacing="2">FIRST PRIZE</text>
+  <text x="90" y="636" fill="#E9E6DF" font-family="'Courier New', monospace" font-size="18" font-weight="700">₹8,000</text>
+  <line x1="280" y1="595" x2="280" y2="640" stroke="#ffffff" stroke-opacity="0.1" />
+  <text x="310" y="612" fill="#77716A" font-family="'Courier New', monospace" font-size="10" letter-spacing="2">TYPE</text>
+  <text x="310" y="636" fill="#E9E6DF" font-family="'Courier New', monospace" font-size="16" font-weight="700">INDIVIDUAL</text>
+  <text x="460" y="612" fill="#77716A" font-family="'Courier New', monospace" font-size="10" letter-spacing="2">STATUS</text>
+  <text x="460" y="636" fill="#10b981" font-family="'Courier New', monospace" font-size="14" font-weight="700">OPEN</text>
+
+  <text x="300" y="700" text-anchor="middle" fill="#77716A" font-family="'Courier New', monospace" font-size="11" letter-spacing="3">YATHARTH '26 &bull; MAHARAJA AGRASEN COLLEGE</text>
+</svg>

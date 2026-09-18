@@ -11,6 +11,8 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    "yatharth-offline-preview/**",
+    "scripts/**",
     "next-env.d.ts",
   ]),
 ]);

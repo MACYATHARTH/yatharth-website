@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1917" />
+      <stop offset="40%" stop-color="#0f0e0c" />
+      <stop offset="100%" stop-color="#08080a" />
+    </linearGradient>
+    <radialGradient id="accentGlow" cx="50%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#8F3025" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#8F3025" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="crimsonBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8F3025" />
+      <stop offset="100%" stop-color="#5C211C" />
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="800" fill="url(#bg)" />
+  <rect width="600" height="800" fill="url(#accentGlow)" />
+
+  <!-- Grid lines -->
+  <g stroke="#ffffff" stroke-opacity="0.04" stroke-width="1">
+    <line x1="40" y1="0" x2="40" y2="800" />
+    <line x1="560" y1="0" x2="560" y2="800" />
+    <line x1="0" y1="60" x2="600" y2="60" />
+    <line x1="0" y1="740" x2="600" y2="740" />
+  </g>
+
+  <!-- Border Frame -->
+  <rect x="40" y="60" width="520" height="680" fill="none" stroke="#8F3025" stroke-opacity="0.4" stroke-width="1.5" />
+
+  <!-- Top Header -->
+  <text x="60" y="100" fill="#8F3025" font-family="'Courier New', monospace" font-size="12" font-weight="700" letter-spacing="4">PRINT JOURNALISM</text>
+  <text x="540" y="100" text-anchor="end" fill="#77716A" font-family="'Courier New', monospace" font-size="11" letter-spacing="2">EVENT 01</text>
+  <line x1="60" y1="115" x2="540" y2="115" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1" />
+
+  <!-- Visual Motif: Typewriter / Press Badge -->
+  <g transform="translate(300, 240)">
+    <circle r="75" fill="#171513" stroke="#8F3025" stroke-width="2" />
+    <circle r="65" fill="none" stroke="#ffffff" stroke-opacity="0.1" stroke-dasharray="4,4" />
+    <!-- Press Quill / Ink Icon -->
+    <path d="M-20,-30 L20,-30 L30,10 L0,45 L-30,10 Z" fill="#8F3025" opacity="0.8" />
+    <line x1="0" y1="-25" x2="0" y2="40" stroke="#E9E6DF" stroke-width="2" />
+  </g>
+
+  <!-- Main Title -->
+  <text x="300" y="380" text-anchor="middle" fill="#E9E6DF" font-family="'Georgia', serif" font-size="34" font-weight="900" letter-spacing="2">KHABAR-E-TAHQEEQ</text>
+  <text x="300" y="420" text-anchor="middle" fill="#8F3025" font-family="'Courier New', monospace" font-size="15" font-weight="700" letter-spacing="3">INVESTIGATIVE REPORTING</text>
+
+  <!-- Divider Ribbon -->
+  <rect x="180" y="445" width="240" height="2" fill="url(#crimsonBar)" />
+
+  <!-- Description snippet -->
+  <text x="300" y="490" text-anchor="middle" fill="#A8A29E" font-family="sans-serif" font-size="14" font-weight="400">On-ground sleuthing, verification under embargo,</text>
+  <text x="300" y="515" text-anchor="middle" fill="#A8A29E" font-family="sans-serif" font-size="14" font-weight="400">and headline feature drafting under live newsroom deadline.</text>
+
+  <!-- Bottom Prize / Specs Strip -->
+  <rect x="60" y="580" width="480" height="75" fill="#171513" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1" rx="2" />
+  <text x="90" y="612" fill="#77716A" font-family="'Courier New', monospace" font-size="10" letter-spacing="2">FIRST PRIZE</text>
+  <text x="90" y="636" fill="#E9E6DF" font-family="'Courier New', monospace" font-size="18" font-weight="700">₹10,000</text>
+  <line x1="280" y1="595" x2="280" y2="640" stroke="#ffffff" stroke-opacity="0.1" />
+  <text x="310" y="612" fill="#77716A" font-family="'Courier New', monospace" font-size="10" letter-spacing="2">TEAM SIZE</text>
+  <text x="310" y="636" fill="#E9E6DF" font-family="'Courier New', monospace" font-size="16" font-weight="700">1 – 2 STUDENTS</text>
+  <text x="460" y="612" fill="#77716A" font-family="'Courier New', monospace" font-size="10" letter-spacing="2">STATUS</text>
+  <text x="460" y="636" fill="#10b981" font-family="'Courier New', monospace" font-size="14" font-weight="700">OPEN</text>
+
+  <!-- Footer Tag -->
+  <text x="300" y="700" text-anchor="middle" fill="#77716A" font-family="'Courier New', monospace" font-size="11" letter-spacing="3">YATHARTH '26 &bull; MAHARAJA AGRASEN COLLEGE</text>
+</svg>
