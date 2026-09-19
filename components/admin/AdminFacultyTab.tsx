@@ -135,7 +135,6 @@ export function AdminFacultyTab({
 
   // Handle Photo File Upload
   const handleUploadPhoto = async (file: File) => {
-    if (!isDevelopment) return;
     setIsUploadingPhoto(true);
     try {
       const data = new FormData();
@@ -163,7 +162,7 @@ export function AdminFacultyTab({
     startTransition(async () => {
       // If a new photo file was picked and not yet uploaded
       let finalPhotoUrl = formData.photoUrl.trim();
-      if (photoFile && isDevelopment) {
+      if (photoFile) {
         const uploadData = new FormData();
         uploadData.append("file", photoFile);
         const uploadRes = await uploadAssetAction(uploadData, "faculty");

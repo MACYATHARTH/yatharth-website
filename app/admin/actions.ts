@@ -7,6 +7,7 @@ import { assertAdminAuthorized } from "@/lib/auth/admin-guard";
 import { verifyPassword } from "@/lib/auth/password";
 import { createAdminSession, clearAdminSession } from "@/lib/auth/session";
 import {
+  getActiveEdition,
   updateActiveEditionThemeSettings,
   updateActiveEditionDates,
 } from "@/lib/data/edition.service";
@@ -68,7 +69,11 @@ import {
   Announcement,
   PriorityLevel,
 } from "@/lib/data/types";
-import { writeFile, mkdir } from "fs/promises";
+import {
+  uploadToSupabaseStorage,
+  deleteFromSupabaseStorage,
+  extractStoragePathFromUrl,
+} from "@/lib/storage/supabase-storage";
 import path from "path";
 
 // ══════════════════════════════════════════════════════════════════
@@ -89,6 +94,16 @@ export async function updateThemeAppearanceAction(data: {
 }) {
   try {
     await assertAdminAuthorized();
+
+    let previousWallpaperUrl: string | null = null;
+    if (data.wallpaperUrl !== undefined) {
+      try {
+        const currentEdition = await getActiveEdition();
+        previousWallpaperUrl = (currentEdition?.themeSettings?.wallpaperUrl as string) || null;
+      } catch {
+        // Continue if reading current edition fails
+      }
+    }
 
     const updates: Record<string, unknown> = {};
 
@@ -121,6 +136,21 @@ export async function updateThemeAppearanceAction(data: {
     }
 
     const updated = await updateActiveEditionThemeSettings(updates);
+
+    // If wallpaperUrl was changed/reset, safely clean up previous custom wallpaper if it belongs to our Supabase bucket
+    if (
+      previousWallpaperUrl &&
+      updates.wallpaperUrl !== undefined &&
+      previousWallpaperUrl !== updates.wallpaperUrl
+    ) {
+      const oldPath = extractStoragePathFromUrl(previousWallpaperUrl);
+      if (oldPath) {
+        deleteFromSupabaseStorage({ filePath: oldPath }).catch((delErr) => {
+          console.error("[Supabase Storage] Cleanup of replaced wallpaper failed:", delErr);
+        });
+      }
+    }
+
     revalidatePath("/", "layout");
 
     return {
@@ -134,8 +164,9 @@ export async function updateThemeAppearanceAction(data: {
 }
 
 /**
- * Upload Asset (Development mode only)
- * Saves to public/assets/[folder] and returns relative URL
+ * Upload Asset via Supabase Storage
+ * Supports: wallpaper, logo, posters, gallery, faculty
+ * Saves persistently to Supabase Storage and returns public CDN URL
  */
 export async function uploadAssetAction(
   formData: FormData,
@@ -165,25 +196,81 @@ export async function uploadAssetAction(
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const uploadDir = path.join(process.cwd(), "public", "assets", folder);
-    await mkdir(uploadDir, { recursive: true });
-
     const ext = path.extname(file.name) || ".jpg";
     const safeExt = [".jpg", ".jpeg", ".png", ".webp", ".avif", ".svg"].includes(ext.toLowerCase())
       ? ext.toLowerCase()
       : ".jpg";
 
-    const filename = `${folder}-${Date.now()}${safeExt}`;
-    const filePath = path.join(uploadDir, filename);
-
-    await writeFile(filePath, buffer);
-
-    const publicUrl = `/assets/${folder}/${filename}`;
-
-    // If wallpaper, also update themeSettings
     if (folder === "wallpaper") {
-      await updateActiveEditionThemeSettings({ wallpaperUrl: publicUrl });
-    } else if (folder === "logo") {
+      // 1. Read current active edition to capture previous wallpaper URL
+      let previousWallpaperUrl: string | null = null;
+      try {
+        const currentEdition = await getActiveEdition();
+        previousWallpaperUrl = (currentEdition?.themeSettings?.wallpaperUrl as string) || null;
+      } catch {
+        // Continue if reading current edition fails
+      }
+
+      // 2. Upload new wallpaper to Supabase Storage
+      const filename = `wallpaper-${Date.now()}${safeExt}`;
+      const uploadRes = await uploadToSupabaseStorage({
+        folder: "wallpapers",
+        filename,
+        fileBuffer: buffer,
+        contentType: file.type || "image/jpeg",
+      });
+
+      if (!uploadRes.success || !uploadRes.url) {
+        return {
+          success: false,
+          error: uploadRes.error || "Failed to upload wallpaper to Supabase Storage.",
+        };
+      }
+
+      const newWallpaperUrl = uploadRes.url;
+
+      // 3. Update database with new wallpaper URL
+      await updateActiveEditionThemeSettings({ wallpaperUrl: newWallpaperUrl });
+
+      // 4. Only AFTER database update succeeds, delete previous wallpaper if it is a Supabase Storage object in our bucket
+      if (previousWallpaperUrl && previousWallpaperUrl !== newWallpaperUrl) {
+        const oldPath = extractStoragePathFromUrl(previousWallpaperUrl);
+        if (oldPath) {
+          deleteFromSupabaseStorage({ filePath: oldPath }).catch((delErr) => {
+            console.error("[Supabase Storage] Cleanup of previous wallpaper failed:", delErr);
+          });
+        }
+      }
+
+      revalidatePath("/", "layout");
+
+      return {
+        success: true,
+        url: newWallpaperUrl,
+      };
+    }
+
+    // ─── Other Asset Folders: logo, posters, gallery, faculty ───
+    const storageFolder = folder === "logo" ? "logos" : folder;
+    const filename = `${folder}-${Date.now()}${safeExt}`;
+
+    const uploadRes = await uploadToSupabaseStorage({
+      folder: storageFolder,
+      filename,
+      fileBuffer: buffer,
+      contentType: file.type || "image/jpeg",
+    });
+
+    if (!uploadRes.success || !uploadRes.url) {
+      return {
+        success: false,
+        error: uploadRes.error || `Failed to upload ${folder} to Supabase Storage.`,
+      };
+    }
+
+    const publicUrl = uploadRes.url;
+
+    if (folder === "logo") {
       await updateActiveEditionThemeSettings({ logoUrl: publicUrl });
     }
 

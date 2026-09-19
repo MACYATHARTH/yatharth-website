@@ -222,8 +222,8 @@ export function AdminClient({
       let finalWallpaperUrl = wallpaperUrl.trim();
       let finalLogoUrl = logoUrl ? logoUrl.trim() : null;
 
-      // Handle file uploads in development mode
-      if (wallpaperFile && isDevelopment) {
+      // Handle file uploads
+      if (wallpaperFile) {
         const formData = new FormData();
         formData.append("file", wallpaperFile);
         const uploadRes = await uploadAssetAction(formData, "wallpaper");
@@ -241,7 +241,7 @@ export function AdminClient({
         }
       }
 
-      if (logoFile && isDevelopment) {
+      if (logoFile) {
         const formData = new FormData();
         formData.append("file", logoFile);
         const uploadRes = await uploadAssetAction(formData, "logo");
@@ -396,7 +396,7 @@ export function AdminClient({
     startCreateEventTransition(async () => {
       let finalPosterUrl = newEventData.posterUrl.trim() || null;
 
-      if (newPosterFile && isDevelopment) {
+      if (newPosterFile) {
         const formData = new FormData();
         formData.append("file", newPosterFile);
         const uploadRes = await uploadAssetAction(formData, "posters");
@@ -464,7 +464,7 @@ export function AdminClient({
 
     let finalPosterUrl = editingEvent.posterUrl;
 
-    if (editPosterFile && isDevelopment) {
+    if (editPosterFile) {
       const formData = new FormData();
       formData.append("file", editPosterFile);
       const uploadRes = await uploadAssetAction(formData, "posters");
@@ -593,7 +593,7 @@ export function AdminClient({
     startPhotoTransition(async () => {
       let finalMediaUrl = newPhotoData.mediaUrl.trim();
 
-      if (newPhotoFile && isDevelopment) {
+      if (newPhotoFile) {
         const formData = new FormData();
         formData.append("file", newPhotoFile);
         const uploadRes = await uploadAssetAction(formData, "gallery");
@@ -1157,21 +1157,20 @@ export function AdminClient({
                     />
                   </div>
 
-                  {/* Dev File Upload */}
+                  {/* Master Wallpaper Upload */}
                   <div className="pt-2 border-t border-white/[0.06] space-y-1.5">
                     <span className="text-[11px] font-mono uppercase text-zinc-400">
-                      Upload Local Wallpaper (Dev Only)
+                      Upload Master Wallpaper
                     </span>
                     <input
                       type="file"
                       accept="image/jpeg,image/png,image/webp,image/avif"
-                      disabled={!isDevelopment}
                       onChange={(e) => {
                         const file = e.target.files?.[0] || null;
                         setWallpaperFile(file);
                         if (file) setWallpaperUrl(URL.createObjectURL(file));
                       }}
-                      className="w-full text-xs text-zinc-400 file:mr-3 file:py-1 file:px-2.5 file:rounded-xs file:border file:border-white/15 file:text-xs file:font-mono file:bg-white/[0.04] file:text-white hover:file:bg-white/10 file:cursor-pointer cursor-pointer disabled:opacity-50"
+                      className="w-full text-xs text-zinc-400 file:mr-3 file:py-1 file:px-2.5 file:rounded-xs file:border file:border-white/15 file:text-xs file:font-mono file:bg-white/[0.04] file:text-white hover:file:bg-white/10 file:cursor-pointer cursor-pointer"
                     />
                   </div>
 
@@ -1238,18 +1237,17 @@ export function AdminClient({
 
                   <div className="pt-2 border-t border-white/[0.06] space-y-1.5">
                     <span className="text-[11px] font-mono uppercase text-zinc-400">
-                      Upload Local Logo (Dev Only)
+                      Upload Logo Mark
                     </span>
                     <input
                       type="file"
                       accept="image/jpeg,image/png,image/webp,image/avif,image/svg+xml"
-                      disabled={!isDevelopment}
                       onChange={(e) => {
                         const file = e.target.files?.[0] || null;
                         setLogoFile(file);
                         if (file) setLogoUrl(URL.createObjectURL(file));
                       }}
-                      className="w-full text-xs text-zinc-400 file:mr-3 file:py-1 file:px-2.5 file:rounded-xs file:border file:border-white/15 file:text-xs file:font-mono file:bg-white/[0.04] file:text-white hover:file:bg-white/10 file:cursor-pointer cursor-pointer disabled:opacity-50"
+                      className="w-full text-xs text-zinc-400 file:mr-3 file:py-1 file:px-2.5 file:rounded-xs file:border file:border-white/15 file:text-xs file:font-mono file:bg-white/[0.04] file:text-white hover:file:bg-white/10 file:cursor-pointer cursor-pointer"
                     />
                   </div>
                 </div>
