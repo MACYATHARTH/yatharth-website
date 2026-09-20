@@ -7,7 +7,7 @@ import { Award, ExternalLink, Mail, Building, CheckCircle2, ArrowRight } from "l
 export const metadata: Metadata = {
   title: "Festival Sponsors & Media Partners",
   description:
-    "Official sponsors, broadcast networks, and media publishing partners supporting YATHARTH '26. Download sponsorship prospectus and partnership tiers.",
+    "Official sponsors, broadcast networks, and media publishing partners supporting YATHARTH. Download sponsorship prospectus and partnership tiers.",
 };
 
 const TIER_CONFIG: Record<
@@ -64,7 +64,7 @@ export default async function SponsorsPage() {
             </h1>
           </div>
           <p className="text-sm sm:text-base text-[var(--theme-text-muted)] max-w-3xl leading-relaxed">
-            YATHARTH &apos;26 is supported by leading press organizations, national broadcast networks, and educational institutions committed to nurturing fearless and verified student journalism.
+            YATHARTH is supported by leading press organizations, national broadcast networks, and educational institutions committed to nurturing fearless and verified student journalism.
           </p>
         </div>
 
@@ -151,7 +151,7 @@ export default async function SponsorsPage() {
             <div className="lg:col-span-8 space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[var(--theme-surface-secondary)]/40 border border-[var(--theme-border)] text-[var(--theme-text-muted)] text-xs font-mono uppercase tracking-wider">
                 <Building className="w-3.5 h-3.5 text-[var(--theme-accent)]" />
-                <span>Partnership Prospectus &bull; YATHARTH &apos;26</span>
+                <span>Partnership Prospectus &bull; YATHARTH</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-black text-[var(--theme-text-primary)] tracking-tight">
                 Partner With Delhi University&apos;s Flagship Journalism Festival
@@ -188,7 +188,7 @@ export default async function SponsorsPage() {
               </p>
               <div className="space-y-3">
                 <a
-                  href="mailto:convenor.yatharth@mac.du.ac.in?subject=YATHARTH%2026%20Sponsorship%20Inquiry"
+                  href="mailto:convenor.yatharth@mac.du.ac.in?subject=YATHARTH%20Sponsorship%20Inquiry"
                   className="w-full py-3 bg-[var(--theme-cta)] text-[var(--theme-cta-text)] hover:opacity-90 text-xs font-mono uppercase font-bold tracking-wider transition-opacity flex items-center justify-center gap-2"
                 >
                   <Mail className="w-4 h-4" />

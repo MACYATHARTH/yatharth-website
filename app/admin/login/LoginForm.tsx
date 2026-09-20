@@ -141,7 +141,7 @@ export function LoginForm() {
 
       {/* Security notice footer */}
       <div className="pt-4 border-t border-[var(--theme-border)] text-[10px] font-mono text-[var(--theme-text-muted)] text-center leading-relaxed">
-        <p>YATHARTH &apos;26 • Department of Journalism, Maharaja Agrasen College</p>
+        <p>YATHARTH • Department of Journalism, Maharaja Agrasen College</p>
         <p className="opacity-70 mt-0.5">All administrative access attempts are cryptographically verified.</p>
       </div>
     </div>

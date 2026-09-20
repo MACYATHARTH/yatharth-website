@@ -334,8 +334,8 @@ export type EventWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   edition?: Prisma.XOR<Prisma.EditionScalarRelationFilter, Prisma.EditionWhereInput>
   venue?: Prisma.XOR<Prisma.VenueNullableScalarRelationFilter, Prisma.VenueWhereInput> | null
-  scheduleEntries?: Prisma.ScheduleEntryListRelationFilter
   coordinators?: Prisma.EventCoordinatorListRelationFilter
+  scheduleEntries?: Prisma.ScheduleEntryListRelationFilter
 }
 
 export type EventOrderByWithRelationInput = {
@@ -361,8 +361,8 @@ export type EventOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   edition?: Prisma.EditionOrderByWithRelationInput
   venue?: Prisma.VenueOrderByWithRelationInput
-  scheduleEntries?: Prisma.ScheduleEntryOrderByRelationAggregateInput
   coordinators?: Prisma.EventCoordinatorOrderByRelationAggregateInput
+  scheduleEntries?: Prisma.ScheduleEntryOrderByRelationAggregateInput
 }
 
 export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -391,8 +391,8 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   edition?: Prisma.XOR<Prisma.EditionScalarRelationFilter, Prisma.EditionWhereInput>
   venue?: Prisma.XOR<Prisma.VenueNullableScalarRelationFilter, Prisma.VenueWhereInput> | null
-  scheduleEntries?: Prisma.ScheduleEntryListRelationFilter
   coordinators?: Prisma.EventCoordinatorListRelationFilter
+  scheduleEntries?: Prisma.ScheduleEntryListRelationFilter
 }, "id" | "slug">
 
 export type EventOrderByWithAggregationInput = {
@@ -470,8 +470,8 @@ export type EventCreateInput = {
   updatedAt?: Date | string
   edition: Prisma.EditionCreateNestedOneWithoutEventsInput
   venue?: Prisma.VenueCreateNestedOneWithoutEventsInput
-  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEventInput
   coordinators?: Prisma.EventCoordinatorCreateNestedManyWithoutEventInput
+  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateInput = {
@@ -495,8 +495,8 @@ export type EventUncheckedCreateInput = {
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEventInput
   coordinators?: Prisma.EventCoordinatorUncheckedCreateNestedManyWithoutEventInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventUpdateInput = {
@@ -520,8 +520,8 @@ export type EventUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   edition?: Prisma.EditionUpdateOneRequiredWithoutEventsNestedInput
   venue?: Prisma.VenueUpdateOneWithoutEventsNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEventNestedInput
   coordinators?: Prisma.EventCoordinatorUpdateManyWithoutEventNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateInput = {
@@ -545,8 +545,8 @@ export type EventUncheckedUpdateInput = {
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEventNestedInput
   coordinators?: Prisma.EventCoordinatorUncheckedUpdateManyWithoutEventNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateManyInput = {
@@ -875,8 +875,8 @@ export type EventCreateWithoutEditionInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   venue?: Prisma.VenueCreateNestedOneWithoutEventsInput
-  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEventInput
   coordinators?: Prisma.EventCoordinatorCreateNestedManyWithoutEventInput
+  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutEditionInput = {
@@ -899,8 +899,8 @@ export type EventUncheckedCreateWithoutEditionInput = {
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEventInput
   coordinators?: Prisma.EventCoordinatorUncheckedCreateNestedManyWithoutEventInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutEditionInput = {
@@ -1087,8 +1087,8 @@ export type EventCreateWithoutVenueInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   edition: Prisma.EditionCreateNestedOneWithoutEventsInput
-  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEventInput
   coordinators?: Prisma.EventCoordinatorCreateNestedManyWithoutEventInput
+  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutVenueInput = {
@@ -1111,8 +1111,8 @@ export type EventUncheckedCreateWithoutVenueInput = {
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEventInput
   coordinators?: Prisma.EventCoordinatorUncheckedCreateNestedManyWithoutEventInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutVenueInput = {
@@ -1295,8 +1295,8 @@ export type EventUpdateWithoutEditionInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   venue?: Prisma.VenueUpdateOneWithoutEventsNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEventNestedInput
   coordinators?: Prisma.EventCoordinatorUpdateManyWithoutEventNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutEditionInput = {
@@ -1319,8 +1319,8 @@ export type EventUncheckedUpdateWithoutEditionInput = {
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEventNestedInput
   coordinators?: Prisma.EventCoordinatorUncheckedUpdateManyWithoutEventNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutEditionInput = {
@@ -1387,8 +1387,8 @@ export type EventUpdateWithoutVenueInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   edition?: Prisma.EditionUpdateOneRequiredWithoutEventsNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEventNestedInput
   coordinators?: Prisma.EventCoordinatorUpdateManyWithoutEventNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutVenueInput = {
@@ -1411,8 +1411,8 @@ export type EventUncheckedUpdateWithoutVenueInput = {
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEventNestedInput
   coordinators?: Prisma.EventCoordinatorUncheckedUpdateManyWithoutEventNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutVenueInput = {
@@ -1443,13 +1443,13 @@ export type EventUncheckedUpdateManyWithoutVenueInput = {
  */
 
 export type EventCountOutputType = {
-  scheduleEntries: number
   coordinators: number
+  scheduleEntries: number
 }
 
 export type EventCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  scheduleEntries?: boolean | EventCountOutputTypeCountScheduleEntriesArgs
   coordinators?: boolean | EventCountOutputTypeCountCoordinatorsArgs
+  scheduleEntries?: boolean | EventCountOutputTypeCountScheduleEntriesArgs
 }
 
 /**
@@ -1465,15 +1465,15 @@ export type EventCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
 /**
  * EventCountOutputType without action
  */
-export type EventCountOutputTypeCountScheduleEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ScheduleEntryWhereInput
+export type EventCountOutputTypeCountCoordinatorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventCoordinatorWhereInput
 }
 
 /**
  * EventCountOutputType without action
  */
-export type EventCountOutputTypeCountCoordinatorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.EventCoordinatorWhereInput
+export type EventCountOutputTypeCountScheduleEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ScheduleEntryWhereInput
 }
 
 
@@ -1500,8 +1500,8 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updatedAt?: boolean
   edition?: boolean | Prisma.EditionDefaultArgs<ExtArgs>
   venue?: boolean | Prisma.Event$venueArgs<ExtArgs>
-  scheduleEntries?: boolean | Prisma.Event$scheduleEntriesArgs<ExtArgs>
   coordinators?: boolean | Prisma.Event$coordinatorsArgs<ExtArgs>
+  scheduleEntries?: boolean | Prisma.Event$scheduleEntriesArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
 
@@ -1582,8 +1582,8 @@ export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   edition?: boolean | Prisma.EditionDefaultArgs<ExtArgs>
   venue?: boolean | Prisma.Event$venueArgs<ExtArgs>
-  scheduleEntries?: boolean | Prisma.Event$scheduleEntriesArgs<ExtArgs>
   coordinators?: boolean | Prisma.Event$coordinatorsArgs<ExtArgs>
+  scheduleEntries?: boolean | Prisma.Event$scheduleEntriesArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1600,8 +1600,8 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     edition: Prisma.$EditionPayload<ExtArgs>
     venue: Prisma.$VenuePayload<ExtArgs> | null
-    scheduleEntries: Prisma.$ScheduleEntryPayload<ExtArgs>[]
     coordinators: Prisma.$EventCoordinatorPayload<ExtArgs>[]
+    scheduleEntries: Prisma.$ScheduleEntryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2020,8 +2020,8 @@ export interface Prisma__EventClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   edition<T extends Prisma.EditionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EditionDefaultArgs<ExtArgs>>): Prisma.Prisma__EditionClient<runtime.Types.Result.GetResult<Prisma.$EditionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   venue<T extends Prisma.Event$venueArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$venueArgs<ExtArgs>>): Prisma.Prisma__VenueClient<runtime.Types.Result.GetResult<Prisma.$VenuePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  scheduleEntries<T extends Prisma.Event$scheduleEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$scheduleEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScheduleEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   coordinators<T extends Prisma.Event$coordinatorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$coordinatorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventCoordinatorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  scheduleEntries<T extends Prisma.Event$scheduleEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$scheduleEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScheduleEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2491,30 +2491,6 @@ export type Event$venueArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 }
 
 /**
- * Event.scheduleEntries
- */
-export type Event$scheduleEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ScheduleEntry
-   */
-  select?: Prisma.ScheduleEntrySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ScheduleEntry
-   */
-  omit?: Prisma.ScheduleEntryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ScheduleEntryInclude<ExtArgs> | null
-  where?: Prisma.ScheduleEntryWhereInput
-  orderBy?: Prisma.ScheduleEntryOrderByWithRelationInput | Prisma.ScheduleEntryOrderByWithRelationInput[]
-  cursor?: Prisma.ScheduleEntryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ScheduleEntryScalarFieldEnum | Prisma.ScheduleEntryScalarFieldEnum[]
-}
-
-/**
  * Event.coordinators
  */
 export type Event$coordinatorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2536,6 +2512,30 @@ export type Event$coordinatorsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.EventCoordinatorScalarFieldEnum | Prisma.EventCoordinatorScalarFieldEnum[]
+}
+
+/**
+ * Event.scheduleEntries
+ */
+export type Event$scheduleEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ScheduleEntry
+   */
+  select?: Prisma.ScheduleEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ScheduleEntry
+   */
+  omit?: Prisma.ScheduleEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ScheduleEntryInclude<ExtArgs> | null
+  where?: Prisma.ScheduleEntryWhereInput
+  orderBy?: Prisma.ScheduleEntryOrderByWithRelationInput | Prisma.ScheduleEntryOrderByWithRelationInput[]
+  cursor?: Prisma.ScheduleEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ScheduleEntryScalarFieldEnum | Prisma.ScheduleEntryScalarFieldEnum[]
 }
 
 /**

@@ -10,7 +10,7 @@ import { BackToHome } from "@/components/layout/BackToHome";
 export const metadata: Metadata = {
   title: "Organising Secretariat & Team Leadership",
   description:
-    "Meet the student coordinators, functional departmental heads, and event leads steering YATHARTH '26 at Maharaja Agrasen College (University of Delhi).",
+    "Meet the student coordinators, functional departmental heads, and event leads steering YATHARTH at Maharaja Agrasen College (University of Delhi).",
 };
 
 export default async function TeamPage() {
@@ -166,13 +166,13 @@ export default async function TeamPage() {
         <div className="border-b border-[var(--theme-border)] pb-12 pt-8 space-y-4">
           <BackToHome currentPage="Organising Team" />
           <div className="text-[11px] font-mono tracking-[0.25em] text-[var(--theme-accent)] uppercase font-semibold">
-            Festival Organisation &bull; YATHARTH &apos;26
+            Festival Organisation &bull; YATHARTH
           </div>
           <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight uppercase leading-none font-varsity">
             Organising Team
           </h1>
           <p className="text-xs sm:text-sm font-mono text-[var(--theme-text-muted)] max-w-2xl leading-relaxed">
-            The student leadership and operational hierarchy steering YATHARTH &apos;26: from executive secretariat coordinators to departmental functional teams and competition event heads.
+            The student leadership and operational hierarchy steering YATHARTH: from executive secretariat coordinators to departmental functional teams and competition event heads.
           </p>
         </div>
 

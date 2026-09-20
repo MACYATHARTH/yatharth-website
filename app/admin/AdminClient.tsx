@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
   Image as ImageIcon,
@@ -29,6 +30,7 @@ import {
   Award,
   Bell,
   LogOut,
+  Layers,
 } from "lucide-react";
 import {
   updateThemeAppearanceAction,
@@ -58,8 +60,10 @@ import {
   ContactPageSettings,
   FacultyMember,
   Announcement,
+  Edition,
 } from "@/lib/data/types";
 import { THEME_PRESETS } from "@/lib/data/theme.config";
+import { formatEditionBranding } from "@/lib/data/edition-branding";
 import { AdminContentTab } from "@/components/admin/AdminContentTab";
 import { AdminTeamTab } from "@/components/admin/AdminTeamTab";
 import { AdminFacultyTab } from "@/components/admin/AdminFacultyTab";
@@ -67,6 +71,7 @@ import { AdminLinksTab } from "@/components/admin/AdminLinksTab";
 import { AdminScheduleTab } from "@/components/admin/AdminScheduleTab";
 import { AdminContactTab } from "@/components/admin/AdminContactTab";
 import { AdminAnnouncementsTab } from "@/components/admin/AdminAnnouncementsTab";
+import { AdminEditionTab } from "@/components/admin/AdminEditionTab";
 
 interface AdminClientProps {
   initialAppearance: {
@@ -108,11 +113,14 @@ interface AdminClientProps {
   initialFaculty: FacultyMember[];
   initialAnnouncements?: Announcement[];
   initialContactSettings?: ContactPageSettings;
+  initialEditions?: Edition[];
+  activeEdition?: Edition | null;
   isDevelopment: boolean;
 }
 
 type TabType =
   | "appearance"
+  | "edition"
   | "content"
   | "events"
   | "schedule"
@@ -165,13 +173,21 @@ export function AdminClient({
   initialFaculty,
   initialAnnouncements = [],
   initialContactSettings,
+  initialEditions = [],
+  activeEdition: passedActiveEdition,
   isDevelopment,
 }: AdminClientProps) {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabType>("appearance");
   const [facultyList, setFacultyList] = useState<FacultyMember[]>(initialFaculty || []);
   const [announcementsList, setAnnouncementsList] = useState<Announcement[]>(
     initialAnnouncements || []
   );
+  const [editionsList, setEditionsList] = useState<Edition[]>(initialEditions);
+  const [currentActiveEdition, setCurrentActiveEdition] = useState<Edition | null>(
+    passedActiveEdition || initialEditions.find((e) => e.status === "ACTIVE") || null
+  );
+  const currentBranding = formatEditionBranding(currentActiveEdition);
 
   const [isLoggingOut, startLogoutTransition] = useTransition();
   const handleLogout = () => {
@@ -358,6 +374,7 @@ export function AdminClient({
     setEventPendingId(null);
 
     if (res.success && res.event) {
+      router.refresh();
       setEventMessages((prev) => ({
         ...prev,
         [eventItem.id]: {
@@ -433,6 +450,7 @@ export function AdminClient({
       });
 
       if (res.success && res.event) {
+        router.refresh();
         setEventsList((prev) => [res.event!, ...prev]);
         setIsCreateEventOpen(false);
         setNewPosterFile(null);
@@ -497,10 +515,14 @@ export function AdminClient({
     setEditPosterFile(null);
 
     if (res.success && res.event) {
+      router.refresh();
       setEventsList((prev) => prev.map((e) => (e.id === editingEvent.id ? res.event! : e)));
       setEditingEvent(null);
     } else {
       alert(res.error || "Failed to update event.");
+      if (res.error?.includes("no longer exists")) {
+        router.refresh();
+      }
     }
   };
 
@@ -510,10 +532,14 @@ export function AdminClient({
 
     const res = await deleteEventAction(id);
     if (res.success) {
+      router.refresh();
       setEventsList((prev) => prev.filter((e) => e.id !== id));
       if (editingEvent?.id === id) setEditingEvent(null);
     } else {
       alert(res.error || "Failed to delete event.");
+      if (res.error?.includes("no longer exists")) {
+        router.refresh();
+      }
     }
   };
 
@@ -530,6 +556,7 @@ export function AdminClient({
       });
 
       if (res.success && res.coordinator) {
+        router.refresh();
         const updatedCoordinators = [...(editingEvent.coordinators || []), res.coordinator];
         const updatedEvent = { ...editingEvent, coordinators: updatedCoordinators };
         setEditingEvent(updatedEvent);
@@ -537,6 +564,9 @@ export function AdminClient({
         setNewCoordData({ name: "", role: "HEAD", phone: "", email: "" });
       } else {
         alert(res.error || "Failed to add coordinator.");
+        if (res.error?.includes("no longer exists")) {
+          router.refresh();
+        }
       }
     });
   };
@@ -548,12 +578,16 @@ export function AdminClient({
 
     const res = await removeEventCoordinatorAction(coordId);
     if (res.success) {
+      router.refresh();
       const updatedCoordinators = (editingEvent.coordinators || []).filter((c) => c.id !== coordId);
       const updatedEvent = { ...editingEvent, coordinators: updatedCoordinators };
       setEditingEvent(updatedEvent);
       setEventsList((prev) => prev.map((e) => (e.id === editingEvent.id ? updatedEvent : e)));
     } else {
       alert(res.error || "Failed to remove coordinator.");
+      if (res.error?.includes("no longer exists")) {
+        router.refresh();
+      }
     }
   };
 
@@ -675,7 +709,7 @@ export function AdminClient({
               Master Admin
             </span>
             <h1 className="text-lg sm:text-xl font-bold tracking-tight text-white">
-              YATHARTH &apos;26 Console
+              {currentBranding.fullBranding} Console
             </h1>
           </div>
 
@@ -700,6 +734,18 @@ export function AdminClient({
 
         {/* Tab Navigation */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center gap-2 border-t border-white/[0.04] overflow-x-auto scrollbar-none">
+          <button
+            onClick={() => setActiveTab("edition")}
+            className={`flex items-center gap-2 px-4 py-3 text-xs font-mono uppercase tracking-wider border-b-2 transition-all cursor-pointer whitespace-nowrap ${
+              activeTab === "edition"
+                ? "border-[#8F3025] text-white font-bold bg-white/[0.02]"
+                : "border-transparent text-[#77716A] hover:text-[#E9E6DF]"
+            }`}
+          >
+            <Layers className="w-3.5 h-3.5" />
+            <span>Edition Control</span>
+          </button>
+
           <button
             onClick={() => setActiveTab("appearance")}
             className={`flex items-center gap-2 px-4 py-3 text-xs font-mono uppercase tracking-wider border-b-2 transition-all cursor-pointer whitespace-nowrap ${
@@ -823,6 +869,21 @@ export function AdminClient({
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-8">
+        {/* ═══════════════════════════════════════════════
+            TAB 0: EDITION CONTROL CMS
+            ═══════════════════════════════════════════════ */}
+        {activeTab === "edition" && (
+          <AdminEditionTab
+            initialEditions={editionsList}
+            activeEdition={currentActiveEdition}
+            onEditionChange={(updatedEditions) => {
+              setEditionsList(updatedEditions);
+              const newActive = updatedEditions.find((e) => e.status === "ACTIVE") || null;
+              setCurrentActiveEdition(newActive);
+            }}
+          />
+        )}
+
         {/* ═══════════════════════════════════════════════
             TAB 1: APPEARANCE & THEME
             ═══════════════════════════════════════════════ */}
@@ -1311,7 +1372,7 @@ export function AdminClient({
                             className="font-varsity text-lg font-bold tracking-wider"
                             style={{ color: tokens.textPrimary }}
                           >
-                            YATHARTH &apos;26
+                            {currentBranding.fullBranding}
                           </span>
                         )}
                       </div>

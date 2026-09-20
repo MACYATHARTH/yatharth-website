@@ -17,7 +17,10 @@ import {
 export const DEMO_EDITION: Edition = {
   id: "edition-yatharth-26",
   code: "yatharth-26",
-  name: "YATHARTH '26",
+  name: "YATHARTH",
+  displayLabel: "’26–27",
+  startYear: 2026,
+  endYear: 2027,
   year: 2026,
   status: "ACTIVE",
   startDate: "2026-10-24T09:00:00+05:30",
@@ -109,7 +112,7 @@ export const DEMO_PEOPLE: Person[] = [
     email: "convenor.yatharth@mac.du.ac.in",
     phone: null,
     avatarUrl: "/assets/faculty/faculty-rao.svg",
-    bio: "Associate Professor & Faculty Convenor, YATHARTH '26.",
+    bio: "Associate Professor & Faculty Convenor, YATHARTH.",
     socialLinks: { email: "convenor.yatharth@mac.du.ac.in" },
   },
   {
@@ -118,7 +121,7 @@ export const DEMO_PEOPLE: Person[] = [
     email: "advisor.yatharth@mac.du.ac.in",
     phone: null,
     avatarUrl: "/assets/faculty/faculty-kumar.svg",
-    bio: "Assistant Professor & Faculty Advisor, YATHARTH '26.",
+    bio: "Assistant Professor & Faculty Advisor, YATHARTH.",
     socialLinks: { email: "advisor.yatharth@mac.du.ac.in" },
   },
   {
@@ -165,7 +168,7 @@ export const DEMO_PEOPLE: Person[] = [
     email: "creative@yatharthdu.org",
     phone: null,
     avatarUrl: null,
-    bio: "Leading broadsheet branding, stage aesthetics, and visual identity for YATHARTH '26.",
+    bio: "Leading broadsheet branding, stage aesthetics, and visual identity for YATHARTH.",
     socialLinks: { email: "creative@yatharthdu.org" },
   },
   {
@@ -1063,11 +1066,11 @@ export const DEMO_ANNOUNCEMENTS: Announcement[] = [
     id: "ann-1",
     editionId: "edition-yatharth-26",
     slug: "official-rulebook-released",
-    title: "YATHARTH '26 Rulebook & Inter-College Registration Guidelines Released",
+    title: "YATHARTH ’26–27 Rulebook & Inter-College Registration Guidelines Released",
     summary:
       "The official competition catalogue and participation protocols are now published for all national university delegations.",
     content:
-      "The Department of Journalism cordially invites student journalists, broadcasters, documentarians, and photographers from all recognized colleges across the nation to participate in YATHARTH '26. Please inspect event-specific eligibility guidelines, entry caps, and registration portals under the Events Directory.",
+      "The Department of Journalism cordially invites student journalists, broadcasters, documentarians, and photographers from all recognized colleges across the nation to participate in YATHARTH ’26–27. Please inspect event-specific eligibility guidelines, entry caps, and registration portals under the Events Directory.",
     priority: "URGENT",
     publishedAt: "2026-09-08T10:00:00Z",
     isPublished: true,
@@ -1077,7 +1080,7 @@ export const DEMO_ANNOUNCEMENTS: Announcement[] = [
     id: "ann-2",
     editionId: "edition-yatharth-26",
     slug: "editorial-symposium-panel",
-    title: "Prominent Veteran Editors to Headline YATHARTH '26 Keynote Colloquium",
+    title: "Prominent Veteran Editors to Headline YATHARTH ’26–27 Keynote Colloquium",
     summary:
       "Renowned investigative journalists and national news anchors confirmed for the inaugural dialogue on press independence.",
     content:

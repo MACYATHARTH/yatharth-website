@@ -7,6 +7,233 @@ datasource db {
   provider = "postgresql"
 }
 
+model Edition {
+  id              String          @id @default(cuid())
+  code            String          @unique
+  name            String
+  year            Int
+  status          EditionStatus   @default(DRAFT)
+  startDate       DateTime?
+  endDate         DateTime?
+  countdownTarget DateTime?
+  isDateConfirmed Boolean         @default(false)
+  themeSettings   Json?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  displayLabel    String?
+  endYear         Int?
+  startYear       Int?
+  announcements   Announcement[]
+  events          Event[]
+  facultyMembers  FacultyMember[]
+  festivalLinks   FestivalLink[]
+  teams           FestivalTeam[]
+  galleryItems    GalleryItem[]
+  scheduleEntries ScheduleEntry[]
+  sponsors        Sponsor[]
+  teamMembers     TeamMember[]
+}
+
+model Person {
+  id           String             @id @default(cuid())
+  name         String
+  email        String?
+  phone        String?
+  avatarUrl    String?
+  bio          String?
+  socialLinks  Json?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  coordinators EventCoordinator[]
+  teamMembers  TeamMember[]
+}
+
+model FestivalTeam {
+  id           String       @id @default(cuid())
+  editionId    String
+  name         String
+  teamType     TeamType     @default(ORGANIZER)
+  displayOrder Int          @default(0)
+  isPublished  Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  edition      Edition      @relation(fields: [editionId], references: [id], onDelete: Cascade)
+  members      TeamMember[]
+}
+
+model TeamMember {
+  id           String       @id @default(cuid())
+  editionId    String
+  personId     String
+  teamId       String
+  designation  String
+  displayOrder Int          @default(0)
+  isPublished  Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  edition      Edition      @relation(fields: [editionId], references: [id], onDelete: Cascade)
+  person       Person       @relation(fields: [personId], references: [id], onDelete: Cascade)
+  team         FestivalTeam @relation(fields: [teamId], references: [id], onDelete: Cascade)
+}
+
+model EventCoordinator {
+  id              String          @id @default(cuid())
+  eventId         String
+  personId        String
+  role            CoordinatorRole @default(HEAD)
+  contactOverride String?
+  displayOrder    Int             @default(0)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  event           Event           @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  person          Person          @relation(fields: [personId], references: [id], onDelete: Cascade)
+}
+
+model Venue {
+  id              String          @id @default(cuid())
+  name            String
+  building        String
+  floor           String?
+  roomNumber      String?
+  capacity        Int?
+  mapUrl          String?
+  directions      String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  events          Event[]
+  scheduleEntries ScheduleEntry[]
+}
+
+model Event {
+  id                 String             @id @default(cuid())
+  editionId          String
+  slug               String             @unique
+  title              String
+  category           String
+  shortDescription   String
+  fullDescription    String
+  rules              String[]
+  prizes             String[]
+  eligibility        String?
+  participationType  String             @default("INDIVIDUAL")
+  teamSizeLimit      Int?
+  registrationStatus RegistrationStatus @default(COMING_SOON)
+  registrationUrl    String?
+  venueId            String?
+  displayOrder       Int                @default(0)
+  posterUrl          String?
+  published          Boolean            @default(false)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  edition            Edition            @relation(fields: [editionId], references: [id], onDelete: Cascade)
+  venue              Venue?             @relation(fields: [venueId], references: [id])
+  coordinators       EventCoordinator[]
+  scheduleEntries    ScheduleEntry[]
+}
+
+model ScheduleEntry {
+  id           String    @id @default(cuid())
+  editionId    String
+  eventId      String?
+  venueId      String?
+  title        String?
+  description  String?
+  calendarDate DateTime?
+  dayNumber    Int
+  startTime    DateTime
+  endTime      DateTime
+  status       String    @default("UPCOMING")
+  displayOrder Int       @default(0)
+  isPublished  Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  edition      Edition   @relation(fields: [editionId], references: [id], onDelete: Cascade)
+  event        Event?    @relation(fields: [eventId], references: [id])
+  venue        Venue?    @relation(fields: [venueId], references: [id])
+}
+
+model Announcement {
+  id           String        @id @default(cuid())
+  editionId    String
+  slug         String        @unique
+  title        String
+  summary      String
+  content      String
+  priority     PriorityLevel @default(NORMAL)
+  publishedAt  DateTime      @default(now())
+  expiresAt    DateTime?
+  eventId      String?
+  isPublished  Boolean       @default(true)
+  displayOrder Int           @default(0)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  edition      Edition       @relation(fields: [editionId], references: [id], onDelete: Cascade)
+}
+
+model Sponsor {
+  id          String      @id @default(cuid())
+  editionId   String
+  name        String
+  tier        SponsorTier
+  logoUrl     String
+  websiteUrl  String?
+  order       Int         @default(0)
+  isPublished Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  edition     Edition     @relation(fields: [editionId], references: [id], onDelete: Cascade)
+}
+
+model GalleryItem {
+  id           String   @id @default(cuid())
+  editionId    String
+  title        String
+  category     String
+  caption      String
+  altText      String?
+  mediaUrl     String
+  aspectRatio  String   @default("landscape")
+  photographer String?
+  year         Int?
+  displayOrder Int      @default(0)
+  isPublished  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  edition      Edition  @relation(fields: [editionId], references: [id], onDelete: Cascade)
+}
+
+model FestivalLink {
+  id           String   @id @default(cuid())
+  editionId    String
+  platform     String
+  url          String
+  label        String
+  category     String   @default("SOCIAL")
+  displayOrder Int      @default(0)
+  isPublished  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  edition      Edition  @relation(fields: [editionId], references: [id], onDelete: Cascade)
+}
+
+model FacultyMember {
+  id           String      @id @default(cuid())
+  editionId    String
+  name         String
+  designation  String
+  photoUrl     String?
+  role         FacultyRole @default(FACULTY)
+  displayOrder Int         @default(0)
+  isPublished  Boolean     @default(true)
+  email        String?
+  department   String?
+  institution  String?
+  bio          String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  edition      Edition     @relation(fields: [editionId], references: [id], onDelete: Cascade)
+}
+
 enum EditionStatus {
   DRAFT
   ACTIVE
@@ -46,245 +273,8 @@ enum CoordinatorRole {
   COORDINATOR
 }
 
-model Edition {
-  id              String          @id @default(cuid())
-  code            String          @unique // e.g. "yatharth-26"
-  name            String          // e.g. "YATHARTH '26"
-  year            Int
-  status          EditionStatus   @default(DRAFT)
-  startDate       DateTime?
-  endDate         DateTime?
-  countdownTarget DateTime?
-  isDateConfirmed Boolean         @default(false)
-  themeSettings   Json?
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-
-  events          Event[]
-  scheduleEntries ScheduleEntry[]
-  announcements   Announcement[]
-  sponsors        Sponsor[]
-  teams           FestivalTeam[]
-  teamMembers     TeamMember[]
-  galleryItems    GalleryItem[]
-  festivalLinks   FestivalLink[]
-  facultyMembers  FacultyMember[]
-}
-
-model Person {
-  id           String             @id @default(cuid())
-  name         String
-  email        String?
-  phone        String?
-  avatarUrl    String?
-  bio          String?
-  socialLinks  Json?
-  createdAt    DateTime           @default(now())
-  updatedAt    DateTime           @updatedAt
-
-  teamMembers  TeamMember[]
-  coordinators EventCoordinator[]
-}
-
-model FestivalTeam {
-  id           String       @id @default(cuid())
-  editionId    String
-  name         String
-  teamType     TeamType     @default(ORGANIZER)
-  displayOrder Int          @default(0)
-  isPublished  Boolean      @default(true)
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-
-  edition      Edition      @relation(fields: [editionId], references: [id], onDelete: Cascade)
-  members      TeamMember[]
-}
-
-model TeamMember {
-  id           String       @id @default(cuid())
-  editionId    String
-  personId     String
-  teamId       String
-  designation  String
-  displayOrder Int          @default(0)
-  isPublished  Boolean      @default(true)
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-
-  edition      Edition      @relation(fields: [editionId], references: [id], onDelete: Cascade)
-  person       Person       @relation(fields: [personId], references: [id], onDelete: Cascade)
-  team         FestivalTeam @relation(fields: [teamId], references: [id], onDelete: Cascade)
-}
-
-model EventCoordinator {
-  id              String          @id @default(cuid())
-  eventId         String
-  personId        String
-  role            CoordinatorRole @default(HEAD)
-  contactOverride String?
-  displayOrder    Int             @default(0)
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-
-  event           Event           @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  person          Person          @relation(fields: [personId], references: [id], onDelete: Cascade)
-}
-
-model Venue {
-  id              String          @id @default(cuid())
-  name            String
-  building        String
-  floor           String?
-  roomNumber      String?
-  capacity        Int?
-  mapUrl          String?
-  directions      String?
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-
-  events          Event[]
-  scheduleEntries ScheduleEntry[]
-}
-
-model Event {
-  id                 String             @id @default(cuid())
-  editionId          String
-  slug               String             @unique
-  title              String
-  category           String
-  shortDescription   String
-  fullDescription    String
-  rules              String[]
-  prizes             String[]
-  eligibility        String?
-  participationType  String             @default("INDIVIDUAL")
-  teamSizeLimit      Int?
-  registrationStatus RegistrationStatus @default(COMING_SOON)
-  registrationUrl    String?
-  venueId            String?
-  displayOrder       Int                @default(0)
-  posterUrl          String?
-  published          Boolean            @default(false)
-  createdAt          DateTime           @default(now())
-  updatedAt          DateTime           @updatedAt
-
-  edition            Edition            @relation(fields: [editionId], references: [id], onDelete: Cascade)
-  venue              Venue?             @relation(fields: [venueId], references: [id])
-  scheduleEntries    ScheduleEntry[]
-  coordinators       EventCoordinator[]
-}
-
-model ScheduleEntry {
-  id           String    @id @default(cuid())
-  editionId    String
-  eventId      String?
-  venueId      String?
-  title        String?
-  description  String?
-  calendarDate DateTime?
-  dayNumber    Int
-  startTime    DateTime
-  endTime      DateTime
-  status       String    @default("UPCOMING")
-  displayOrder Int       @default(0)
-  isPublished  Boolean   @default(true)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-
-  edition      Edition   @relation(fields: [editionId], references: [id], onDelete: Cascade)
-  event        Event?    @relation(fields: [eventId], references: [id], onDelete: SetNull)
-  venue        Venue?    @relation(fields: [venueId], references: [id], onDelete: SetNull)
-}
-
-model Announcement {
-  id           String        @id @default(cuid())
-  editionId    String
-  slug         String        @unique
-  title        String
-  summary      String
-  content      String
-  priority     PriorityLevel @default(NORMAL)
-  publishedAt  DateTime      @default(now())
-  expiresAt    DateTime?
-  eventId      String?
-  isPublished  Boolean       @default(true)
-  displayOrder Int           @default(0)
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-
-  edition      Edition       @relation(fields: [editionId], references: [id], onDelete: Cascade)
-}
-
-model Sponsor {
-  id          String      @id @default(cuid())
-  editionId   String
-  name        String
-  tier        SponsorTier
-  logoUrl     String
-  websiteUrl  String?
-  order       Int         @default(0)
-  isPublished Boolean     @default(true)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-
-  edition     Edition     @relation(fields: [editionId], references: [id], onDelete: Cascade)
-}
-
-model GalleryItem {
-  id           String   @id @default(cuid())
-  editionId    String
-  title        String
-  category     String
-  caption      String
-  altText      String?
-  mediaUrl     String
-  aspectRatio  String   @default("landscape")
-  photographer String?
-  year         Int?
-  displayOrder Int      @default(0)
-  isPublished  Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  edition      Edition  @relation(fields: [editionId], references: [id], onDelete: Cascade)
-}
-
-model FestivalLink {
-  id           String   @id @default(cuid())
-  editionId    String
-  platform     String
-  url          String
-  label        String
-  category     String   @default("SOCIAL")
-  displayOrder Int      @default(0)
-  isPublished  Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  edition      Edition  @relation(fields: [editionId], references: [id], onDelete: Cascade)
-}
-
 enum FacultyRole {
   PRINCIPAL
   HOD
   FACULTY
-}
-
-model FacultyMember {
-  id           String      @id @default(cuid())
-  editionId    String
-  name         String
-  designation  String
-  photoUrl     String?
-  role         FacultyRole @default(FACULTY)
-  displayOrder Int         @default(0)
-  isPublished  Boolean     @default(true)
-  email        String?
-  department   String?
-  institution  String?
-  bio          String?
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-
-  edition      Edition     @relation(fields: [editionId], references: [id], onDelete: Cascade)
 }

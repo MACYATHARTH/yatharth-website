@@ -1442,7 +1442,10 @@ export const EditionScalarFieldEnum = {
   isDateConfirmed: 'isDateConfirmed',
   themeSettings: 'themeSettings',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  displayLabel: 'displayLabel',
+  endYear: 'endYear',
+  startYear: 'startYear'
 } as const
 
 export type EditionScalarFieldEnum = (typeof EditionScalarFieldEnum)[keyof typeof EditionScalarFieldEnum]

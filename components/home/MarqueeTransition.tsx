@@ -7,9 +7,13 @@ import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
 
 interface MarqueeTransitionProps {
   registrationUrl?: string;
+  editionTitle?: string;
 }
 
-export function MarqueeTransition({ registrationUrl = "/events" }: MarqueeTransitionProps) {
+export function MarqueeTransition({
+  registrationUrl = "/events",
+  editionTitle = "YATHARTH ’26–27",
+}: MarqueeTransitionProps) {
   const reducedMotion = usePrefersReducedMotion();
   const isExternal = registrationUrl.startsWith("http");
 
@@ -40,7 +44,7 @@ export function MarqueeTransition({ registrationUrl = "/events" }: MarqueeTransi
   const StaticContent = (
     <div className="w-full flex items-center justify-between px-6 py-4">
       <span className="text-2xl sm:text-4xl font-black font-varsity uppercase">
-        REGISTER NOW FOR YATHARTH &apos;26
+        REGISTER NOW FOR {editionTitle}
       </span>
       <span className="inline-flex items-center gap-2 text-xs font-bold font-mono uppercase tracking-wider">
         <span>Enter Registration</span>

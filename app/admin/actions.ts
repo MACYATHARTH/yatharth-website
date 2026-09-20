@@ -8,6 +8,10 @@ import { verifyPassword } from "@/lib/auth/password";
 import { createAdminSession, clearAdminSession } from "@/lib/auth/session";
 import {
   getActiveEdition,
+  createEdition,
+  updateEdition,
+  activateEdition,
+  archiveEdition,
   updateActiveEditionThemeSettings,
   updateActiveEditionDates,
 } from "@/lib/data/edition.service";
@@ -68,6 +72,8 @@ import {
   FacultyRole,
   Announcement,
   PriorityLevel,
+  Edition,
+  EditionFormData,
 } from "@/lib/data/types";
 import {
   uploadToSupabaseStorage,
@@ -1430,5 +1436,85 @@ export async function adminLoginAction(data: {
 export async function adminLogoutAction(): Promise<void> {
   await clearAdminSession();
   redirect("/admin/login");
+}
+
+// ══════════════════════════════════════════════════════════════════
+// 12. EDITION MANAGEMENT ACTIONS
+// ══════════════════════════════════════════════════════════════════
+
+/**
+ * Creates a new annual Edition record.
+ */
+export async function createEditionAction(
+  data: EditionFormData
+): Promise<{ success: boolean; edition?: Edition; error?: string }> {
+  try {
+    await assertAdminAuthorized();
+    if (!data.name || !data.name.trim()) {
+      return { success: false, error: "Edition name is required." };
+    }
+    const edition = await createEdition(data);
+    revalidatePath("/", "layout");
+    revalidatePath("/admin");
+    return { success: true, edition };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Failed to create edition.";
+    return { success: false, error: message };
+  }
+}
+
+/**
+ * Updates an existing Edition record.
+ */
+export async function updateEditionAction(
+  id: string,
+  data: Partial<EditionFormData>
+): Promise<{ success: boolean; edition?: Edition; error?: string }> {
+  try {
+    await assertAdminAuthorized();
+    const edition = await updateEdition(id, data);
+    revalidatePath("/", "layout");
+    revalidatePath("/admin");
+    return { success: true, edition };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Failed to update edition.";
+    return { success: false, error: message };
+  }
+}
+
+/**
+ * Activates an edition as the active public edition, setting previous active to archived.
+ */
+export async function activateEditionAction(
+  id: string
+): Promise<{ success: boolean; edition?: Edition; error?: string }> {
+  try {
+    await assertAdminAuthorized();
+    const edition = await activateEdition(id);
+    revalidatePath("/", "layout");
+    revalidatePath("/admin");
+    return { success: true, edition };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Failed to activate edition.";
+    return { success: false, error: message };
+  }
+}
+
+/**
+ * Archives an edition.
+ */
+export async function archiveEditionAction(
+  id: string
+): Promise<{ success: boolean; edition?: Edition; error?: string }> {
+  try {
+    await assertAdminAuthorized();
+    const edition = await archiveEdition(id);
+    revalidatePath("/", "layout");
+    revalidatePath("/admin");
+    return { success: true, edition };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Failed to archive edition.";
+    return { success: false, error: message };
+  }
 }
 

@@ -478,14 +478,6 @@ export type VenueNullableScalarRelationFilter = {
   isNot?: Prisma.VenueWhereInput | null
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type VenueCreateNestedOneWithoutEventsInput = {
   create?: Prisma.XOR<Prisma.VenueCreateWithoutEventsInput, Prisma.VenueUncheckedCreateWithoutEventsInput>
   connectOrCreate?: Prisma.VenueCreateOrConnectWithoutEventsInput

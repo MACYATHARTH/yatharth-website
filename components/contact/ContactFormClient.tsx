@@ -76,7 +76,7 @@ export function ContactFormClient() {
             Dispatch Logged Successfully
           </h3>
           <p className="text-xs text-[var(--theme-text-muted)] max-w-md mx-auto leading-relaxed">
-            Your inquiry has been registered with the YATHARTH &apos;26 Organizing Committee. A coordinator will respond to your provided email address shortly.
+            Your inquiry has been registered with the YATHARTH Organizing Committee. A coordinator will respond to your provided email address shortly.
           </p>
           <button
             type="button"

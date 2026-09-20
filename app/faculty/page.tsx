@@ -9,7 +9,7 @@ import { BackToHome } from "@/components/layout/BackToHome";
 export const metadata: Metadata = {
   title: "Faculty Leadership & Academic Mentorship",
   description:
-    "Academic patron, Head of Department, and faculty mentors guiding institutional ethics, scholarly inquiry, and professional journalism standards for YATHARTH '26 at Maharaja Agrasen College (University of Delhi).",
+    "Academic patron, Head of Department, and faculty mentors guiding institutional ethics, scholarly inquiry, and professional journalism standards for YATHARTH at Maharaja Agrasen College (University of Delhi).",
 };
 
 export default async function FacultyPage() {
@@ -28,7 +28,7 @@ export default async function FacultyPage() {
         <div className="border-b border-[var(--theme-border)] pb-12 pt-8 space-y-4">
           <BackToHome currentPage="Faculty" />
           <div className="text-[11px] font-mono tracking-[0.25em] text-[var(--theme-accent)] uppercase font-semibold">
-            Academic Mentorship &bull; YATHARTH &apos;26
+            Academic Mentorship &bull; YATHARTH
           </div>
           <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight uppercase leading-none font-varsity">
             Faculty Leadership

@@ -210,8 +210,8 @@ export type PersonWhereInput = {
   socialLinks?: Prisma.JsonNullableFilter<"Person">
   createdAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Person"> | Date | string
-  teamMembers?: Prisma.TeamMemberListRelationFilter
   coordinators?: Prisma.EventCoordinatorListRelationFilter
+  teamMembers?: Prisma.TeamMemberListRelationFilter
 }
 
 export type PersonOrderByWithRelationInput = {
@@ -224,8 +224,8 @@ export type PersonOrderByWithRelationInput = {
   socialLinks?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  teamMembers?: Prisma.TeamMemberOrderByRelationAggregateInput
   coordinators?: Prisma.EventCoordinatorOrderByRelationAggregateInput
+  teamMembers?: Prisma.TeamMemberOrderByRelationAggregateInput
 }
 
 export type PersonWhereUniqueInput = Prisma.AtLeast<{
@@ -241,8 +241,8 @@ export type PersonWhereUniqueInput = Prisma.AtLeast<{
   socialLinks?: Prisma.JsonNullableFilter<"Person">
   createdAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Person"> | Date | string
-  teamMembers?: Prisma.TeamMemberListRelationFilter
   coordinators?: Prisma.EventCoordinatorListRelationFilter
+  teamMembers?: Prisma.TeamMemberListRelationFilter
 }, "id">
 
 export type PersonOrderByWithAggregationInput = {
@@ -285,8 +285,8 @@ export type PersonCreateInput = {
   socialLinks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutPersonInput
   coordinators?: Prisma.EventCoordinatorCreateNestedManyWithoutPersonInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutPersonInput
 }
 
 export type PersonUncheckedCreateInput = {
@@ -299,8 +299,8 @@ export type PersonUncheckedCreateInput = {
   socialLinks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutPersonInput
   coordinators?: Prisma.EventCoordinatorUncheckedCreateNestedManyWithoutPersonInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutPersonInput
 }
 
 export type PersonUpdateInput = {
@@ -313,8 +313,8 @@ export type PersonUpdateInput = {
   socialLinks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  teamMembers?: Prisma.TeamMemberUpdateManyWithoutPersonNestedInput
   coordinators?: Prisma.EventCoordinatorUpdateManyWithoutPersonNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutPersonNestedInput
 }
 
 export type PersonUncheckedUpdateInput = {
@@ -327,8 +327,8 @@ export type PersonUncheckedUpdateInput = {
   socialLinks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutPersonNestedInput
   coordinators?: Prisma.EventCoordinatorUncheckedUpdateManyWithoutPersonNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutPersonNestedInput
 }
 
 export type PersonCreateManyInput = {
@@ -404,10 +404,6 @@ export type PersonMinOrderByAggregateInput = {
 export type PersonScalarRelationFilter = {
   is?: Prisma.PersonWhereInput
   isNot?: Prisma.PersonWhereInput
-}
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
 }
 
 export type PersonCreateNestedOneWithoutTeamMembersInput = {
@@ -580,13 +576,13 @@ export type PersonUncheckedUpdateWithoutCoordinatorsInput = {
  */
 
 export type PersonCountOutputType = {
-  teamMembers: number
   coordinators: number
+  teamMembers: number
 }
 
 export type PersonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  teamMembers?: boolean | PersonCountOutputTypeCountTeamMembersArgs
   coordinators?: boolean | PersonCountOutputTypeCountCoordinatorsArgs
+  teamMembers?: boolean | PersonCountOutputTypeCountTeamMembersArgs
 }
 
 /**
@@ -602,15 +598,15 @@ export type PersonCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * PersonCountOutputType without action
  */
-export type PersonCountOutputTypeCountTeamMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TeamMemberWhereInput
+export type PersonCountOutputTypeCountCoordinatorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventCoordinatorWhereInput
 }
 
 /**
  * PersonCountOutputType without action
  */
-export type PersonCountOutputTypeCountCoordinatorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.EventCoordinatorWhereInput
+export type PersonCountOutputTypeCountTeamMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TeamMemberWhereInput
 }
 
 
@@ -624,8 +620,8 @@ export type PersonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   socialLinks?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  teamMembers?: boolean | Prisma.Person$teamMembersArgs<ExtArgs>
   coordinators?: boolean | Prisma.Person$coordinatorsArgs<ExtArgs>
+  teamMembers?: boolean | Prisma.Person$teamMembersArgs<ExtArgs>
   _count?: boolean | Prisma.PersonCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["person"]>
 
@@ -667,8 +663,8 @@ export type PersonSelectScalar = {
 
 export type PersonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "avatarUrl" | "bio" | "socialLinks" | "createdAt" | "updatedAt", ExtArgs["result"]["person"]>
 export type PersonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  teamMembers?: boolean | Prisma.Person$teamMembersArgs<ExtArgs>
   coordinators?: boolean | Prisma.Person$coordinatorsArgs<ExtArgs>
+  teamMembers?: boolean | Prisma.Person$teamMembersArgs<ExtArgs>
   _count?: boolean | Prisma.PersonCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PersonIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -677,8 +673,8 @@ export type PersonIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type $PersonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Person"
   objects: {
-    teamMembers: Prisma.$TeamMemberPayload<ExtArgs>[]
     coordinators: Prisma.$EventCoordinatorPayload<ExtArgs>[]
+    teamMembers: Prisma.$TeamMemberPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1084,8 +1080,8 @@ readonly fields: PersonFieldRefs;
  */
 export interface Prisma__PersonClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  teamMembers<T extends Prisma.Person$teamMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Person$teamMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   coordinators<T extends Prisma.Person$coordinatorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Person$coordinatorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventCoordinatorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  teamMembers<T extends Prisma.Person$teamMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Person$teamMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1517,30 +1513,6 @@ export type PersonDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Person.teamMembers
- */
-export type Person$teamMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the TeamMember
-   */
-  select?: Prisma.TeamMemberSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the TeamMember
-   */
-  omit?: Prisma.TeamMemberOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TeamMemberInclude<ExtArgs> | null
-  where?: Prisma.TeamMemberWhereInput
-  orderBy?: Prisma.TeamMemberOrderByWithRelationInput | Prisma.TeamMemberOrderByWithRelationInput[]
-  cursor?: Prisma.TeamMemberWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TeamMemberScalarFieldEnum | Prisma.TeamMemberScalarFieldEnum[]
-}
-
-/**
  * Person.coordinators
  */
 export type Person$coordinatorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1562,6 +1534,30 @@ export type Person$coordinatorsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.EventCoordinatorScalarFieldEnum | Prisma.EventCoordinatorScalarFieldEnum[]
+}
+
+/**
+ * Person.teamMembers
+ */
+export type Person$teamMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TeamMember
+   */
+  select?: Prisma.TeamMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TeamMember
+   */
+  omit?: Prisma.TeamMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TeamMemberInclude<ExtArgs> | null
+  where?: Prisma.TeamMemberWhereInput
+  orderBy?: Prisma.TeamMemberOrderByWithRelationInput | Prisma.TeamMemberOrderByWithRelationInput[]
+  cursor?: Prisma.TeamMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TeamMemberScalarFieldEnum | Prisma.TeamMemberScalarFieldEnum[]
 }
 
 /**

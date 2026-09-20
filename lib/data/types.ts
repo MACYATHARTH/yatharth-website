@@ -42,6 +42,9 @@ export interface Edition {
   id: string;
   code: string;
   name: string;
+  displayLabel?: string | null;
+  startYear?: number | null;
+  endYear?: number | null;
   year: number;
   status: EditionStatus;
   startDate: string | null;
@@ -51,6 +54,18 @@ export interface Edition {
   themeSettings: Record<string, unknown> | null;
   createdAt?: string;
   updatedAt?: string;
+}
+
+export interface EditionFormData {
+  name: string;
+  displayLabel?: string | null;
+  startYear?: number | null;
+  endYear?: number | null;
+  code?: string;
+  status?: EditionStatus;
+  startDate?: string | null;
+  endDate?: string | null;
+  isDateConfirmed?: boolean;
 }
 
 export type FacultyRole = "PRINCIPAL" | "HOD" | "FACULTY";

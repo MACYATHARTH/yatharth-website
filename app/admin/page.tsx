@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getAdminSession } from "@/lib/auth/session";
-import { getActiveEdition } from "@/lib/data/edition.service";
+import { getActiveEdition, getAllEditionsAdmin } from "@/lib/data/edition.service";
 import { getAllEventsAdmin } from "@/lib/data/event.service";
 import { getAllGalleryItemsAdmin } from "@/lib/data/gallery.service";
 import { getAllScheduleEntriesAdmin, getAllVenues } from "@/lib/data/schedule.service";
@@ -14,7 +14,7 @@ import { ThemePresetName, ContactPageSettings } from "@/lib/data/types";
 import { AdminClient } from "./AdminClient";
 
 export const metadata: Metadata = {
-  title: "Master Admin Console | YATHARTH '26",
+  title: "Master Admin Console | YATHARTH",
   description: "Festival management portal for appearance, branding, content, events, team, gallery, and official links.",
 };
 
@@ -36,6 +36,7 @@ export default async function AdminPage() {
     venues,
     faculty,
     announcements,
+    allEditions,
   ] = await Promise.all([
     getActiveEdition().catch(() => null),
     getAllEventsAdmin().catch(() => []),
@@ -47,6 +48,7 @@ export default async function AdminPage() {
     getAllVenues().catch(() => []),
     getAllFacultyMembersAdmin().catch(() => []),
     getAllAnnouncementsAdmin().catch(() => []),
+    getAllEditionsAdmin().catch(() => []),
   ]);
 
   const themeSettings = edition?.themeSettings || {};
@@ -118,6 +120,8 @@ export default async function AdminPage() {
       initialFaculty={faculty}
       initialAnnouncements={announcements}
       initialContactSettings={themeSettings.contactSettings as ContactPageSettings | undefined}
+      initialEditions={allEditions}
+      activeEdition={edition}
       isDevelopment={isAuthorizedAdmin}
     />
   );

@@ -1,4 +1,4 @@
-import { getActiveEdition } from "@/lib/data/edition.service";
+import { getActiveEdition, formatEditionBranding } from "@/lib/data/edition.service";
 import { getEvents } from "@/lib/data/event.service";
 import { getScheduleEntries } from "@/lib/data/schedule.service";
 import { getAnnouncements } from "@/lib/data/announcement.service";
@@ -34,6 +34,8 @@ export default async function HomePage() {
     getFestivalLinks(),
   ]);
 
+  const branding = formatEditionBranding(edition);
+
   // Determine dynamic registration destination from config / links
   const regLink = links.find(
     (l) =>
@@ -54,7 +56,7 @@ export default async function HomePage() {
       <EventsVisualRibbon events={events} />
 
       {/* ─── 03 / REGISTER NOW MARQUEE — Prominently placed immediately after event posters ─── */}
-      <MarqueeTransition registrationUrl={registrationUrl} />
+      <MarqueeTransition registrationUrl={registrationUrl} editionTitle={branding.fullBranding} />
 
       {/* ─── 04 / SCHEDULE — Day Tabs, Tabular View (Time | Event | Venue) ─── */}
       <SchedulePreviewSection entries={scheduleEntries} />

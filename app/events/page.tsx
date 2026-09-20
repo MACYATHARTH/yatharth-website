@@ -6,7 +6,7 @@ import { BackToHome } from "@/components/layout/BackToHome";
 export const metadata: Metadata = {
   title: "Events Directory & Competition Rulebooks",
   description:
-    "Explore all competitive journalism, broadcast media, photography, and quizzing events for YATHARTH '26. Download official rules and register college delegations.",
+    "Explore all competitive journalism, broadcast media, photography, and quizzing events for YATHARTH. Download official rules and register college delegations.",
 };
 
 export default async function EventsPage() {

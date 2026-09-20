@@ -28,10 +28,14 @@ export type AggregateEdition = {
 
 export type EditionAvgAggregateOutputType = {
   year: number | null
+  endYear: number | null
+  startYear: number | null
 }
 
 export type EditionSumAggregateOutputType = {
   year: number | null
+  endYear: number | null
+  startYear: number | null
 }
 
 export type EditionMinAggregateOutputType = {
@@ -46,6 +50,9 @@ export type EditionMinAggregateOutputType = {
   isDateConfirmed: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  displayLabel: string | null
+  endYear: number | null
+  startYear: number | null
 }
 
 export type EditionMaxAggregateOutputType = {
@@ -60,6 +67,9 @@ export type EditionMaxAggregateOutputType = {
   isDateConfirmed: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  displayLabel: string | null
+  endYear: number | null
+  startYear: number | null
 }
 
 export type EditionCountAggregateOutputType = {
@@ -75,16 +85,23 @@ export type EditionCountAggregateOutputType = {
   themeSettings: number
   createdAt: number
   updatedAt: number
+  displayLabel: number
+  endYear: number
+  startYear: number
   _all: number
 }
 
 
 export type EditionAvgAggregateInputType = {
   year?: true
+  endYear?: true
+  startYear?: true
 }
 
 export type EditionSumAggregateInputType = {
   year?: true
+  endYear?: true
+  startYear?: true
 }
 
 export type EditionMinAggregateInputType = {
@@ -99,6 +116,9 @@ export type EditionMinAggregateInputType = {
   isDateConfirmed?: true
   createdAt?: true
   updatedAt?: true
+  displayLabel?: true
+  endYear?: true
+  startYear?: true
 }
 
 export type EditionMaxAggregateInputType = {
@@ -113,6 +133,9 @@ export type EditionMaxAggregateInputType = {
   isDateConfirmed?: true
   createdAt?: true
   updatedAt?: true
+  displayLabel?: true
+  endYear?: true
+  startYear?: true
 }
 
 export type EditionCountAggregateInputType = {
@@ -128,6 +151,9 @@ export type EditionCountAggregateInputType = {
   themeSettings?: true
   createdAt?: true
   updatedAt?: true
+  displayLabel?: true
+  endYear?: true
+  startYear?: true
   _all?: true
 }
 
@@ -230,6 +256,9 @@ export type EditionGroupByOutputType = {
   themeSettings: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
+  displayLabel: string | null
+  endYear: number | null
+  startYear: number | null
   _count: EditionCountAggregateOutputType | null
   _avg: EditionAvgAggregateOutputType | null
   _sum: EditionSumAggregateOutputType | null
@@ -268,15 +297,18 @@ export type EditionWhereInput = {
   themeSettings?: Prisma.JsonNullableFilter<"Edition">
   createdAt?: Prisma.DateTimeFilter<"Edition"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Edition"> | Date | string
-  events?: Prisma.EventListRelationFilter
-  scheduleEntries?: Prisma.ScheduleEntryListRelationFilter
+  displayLabel?: Prisma.StringNullableFilter<"Edition"> | string | null
+  endYear?: Prisma.IntNullableFilter<"Edition"> | number | null
+  startYear?: Prisma.IntNullableFilter<"Edition"> | number | null
   announcements?: Prisma.AnnouncementListRelationFilter
-  sponsors?: Prisma.SponsorListRelationFilter
-  teams?: Prisma.FestivalTeamListRelationFilter
-  teamMembers?: Prisma.TeamMemberListRelationFilter
-  galleryItems?: Prisma.GalleryItemListRelationFilter
-  festivalLinks?: Prisma.FestivalLinkListRelationFilter
+  events?: Prisma.EventListRelationFilter
   facultyMembers?: Prisma.FacultyMemberListRelationFilter
+  festivalLinks?: Prisma.FestivalLinkListRelationFilter
+  teams?: Prisma.FestivalTeamListRelationFilter
+  galleryItems?: Prisma.GalleryItemListRelationFilter
+  scheduleEntries?: Prisma.ScheduleEntryListRelationFilter
+  sponsors?: Prisma.SponsorListRelationFilter
+  teamMembers?: Prisma.TeamMemberListRelationFilter
 }
 
 export type EditionOrderByWithRelationInput = {
@@ -292,15 +324,18 @@ export type EditionOrderByWithRelationInput = {
   themeSettings?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  events?: Prisma.EventOrderByRelationAggregateInput
-  scheduleEntries?: Prisma.ScheduleEntryOrderByRelationAggregateInput
+  displayLabel?: Prisma.SortOrderInput | Prisma.SortOrder
+  endYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  startYear?: Prisma.SortOrderInput | Prisma.SortOrder
   announcements?: Prisma.AnnouncementOrderByRelationAggregateInput
-  sponsors?: Prisma.SponsorOrderByRelationAggregateInput
-  teams?: Prisma.FestivalTeamOrderByRelationAggregateInput
-  teamMembers?: Prisma.TeamMemberOrderByRelationAggregateInput
-  galleryItems?: Prisma.GalleryItemOrderByRelationAggregateInput
-  festivalLinks?: Prisma.FestivalLinkOrderByRelationAggregateInput
+  events?: Prisma.EventOrderByRelationAggregateInput
   facultyMembers?: Prisma.FacultyMemberOrderByRelationAggregateInput
+  festivalLinks?: Prisma.FestivalLinkOrderByRelationAggregateInput
+  teams?: Prisma.FestivalTeamOrderByRelationAggregateInput
+  galleryItems?: Prisma.GalleryItemOrderByRelationAggregateInput
+  scheduleEntries?: Prisma.ScheduleEntryOrderByRelationAggregateInput
+  sponsors?: Prisma.SponsorOrderByRelationAggregateInput
+  teamMembers?: Prisma.TeamMemberOrderByRelationAggregateInput
 }
 
 export type EditionWhereUniqueInput = Prisma.AtLeast<{
@@ -319,15 +354,18 @@ export type EditionWhereUniqueInput = Prisma.AtLeast<{
   themeSettings?: Prisma.JsonNullableFilter<"Edition">
   createdAt?: Prisma.DateTimeFilter<"Edition"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Edition"> | Date | string
-  events?: Prisma.EventListRelationFilter
-  scheduleEntries?: Prisma.ScheduleEntryListRelationFilter
+  displayLabel?: Prisma.StringNullableFilter<"Edition"> | string | null
+  endYear?: Prisma.IntNullableFilter<"Edition"> | number | null
+  startYear?: Prisma.IntNullableFilter<"Edition"> | number | null
   announcements?: Prisma.AnnouncementListRelationFilter
-  sponsors?: Prisma.SponsorListRelationFilter
-  teams?: Prisma.FestivalTeamListRelationFilter
-  teamMembers?: Prisma.TeamMemberListRelationFilter
-  galleryItems?: Prisma.GalleryItemListRelationFilter
-  festivalLinks?: Prisma.FestivalLinkListRelationFilter
+  events?: Prisma.EventListRelationFilter
   facultyMembers?: Prisma.FacultyMemberListRelationFilter
+  festivalLinks?: Prisma.FestivalLinkListRelationFilter
+  teams?: Prisma.FestivalTeamListRelationFilter
+  galleryItems?: Prisma.GalleryItemListRelationFilter
+  scheduleEntries?: Prisma.ScheduleEntryListRelationFilter
+  sponsors?: Prisma.SponsorListRelationFilter
+  teamMembers?: Prisma.TeamMemberListRelationFilter
 }, "id" | "code">
 
 export type EditionOrderByWithAggregationInput = {
@@ -343,6 +381,9 @@ export type EditionOrderByWithAggregationInput = {
   themeSettings?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  displayLabel?: Prisma.SortOrderInput | Prisma.SortOrder
+  endYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  startYear?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.EditionCountOrderByAggregateInput
   _avg?: Prisma.EditionAvgOrderByAggregateInput
   _max?: Prisma.EditionMaxOrderByAggregateInput
@@ -366,6 +407,9 @@ export type EditionScalarWhereWithAggregatesInput = {
   themeSettings?: Prisma.JsonNullableWithAggregatesFilter<"Edition">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Edition"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Edition"> | Date | string
+  displayLabel?: Prisma.StringNullableWithAggregatesFilter<"Edition"> | string | null
+  endYear?: Prisma.IntNullableWithAggregatesFilter<"Edition"> | number | null
+  startYear?: Prisma.IntNullableWithAggregatesFilter<"Edition"> | number | null
 }
 
 export type EditionCreateInput = {
@@ -381,15 +425,18 @@ export type EditionCreateInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventCreateNestedManyWithoutEditionInput
   facultyMembers?: Prisma.FacultyMemberCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
 }
 
 export type EditionUncheckedCreateInput = {
@@ -405,15 +452,18 @@ export type EditionUncheckedCreateInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
   facultyMembers?: Prisma.FacultyMemberUncheckedCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
 }
 
 export type EditionUpdateInput = {
@@ -429,15 +479,18 @@ export type EditionUpdateInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
   facultyMembers?: Prisma.FacultyMemberUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionUncheckedUpdateInput = {
@@ -453,15 +506,18 @@ export type EditionUncheckedUpdateInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
   facultyMembers?: Prisma.FacultyMemberUncheckedUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionCreateManyInput = {
@@ -477,6 +533,9 @@ export type EditionCreateManyInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
 }
 
 export type EditionUpdateManyMutationInput = {
@@ -492,6 +551,9 @@ export type EditionUpdateManyMutationInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type EditionUncheckedUpdateManyInput = {
@@ -507,6 +569,9 @@ export type EditionUncheckedUpdateManyInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type EditionCountOrderByAggregateInput = {
@@ -522,10 +587,15 @@ export type EditionCountOrderByAggregateInput = {
   themeSettings?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  displayLabel?: Prisma.SortOrder
+  endYear?: Prisma.SortOrder
+  startYear?: Prisma.SortOrder
 }
 
 export type EditionAvgOrderByAggregateInput = {
   year?: Prisma.SortOrder
+  endYear?: Prisma.SortOrder
+  startYear?: Prisma.SortOrder
 }
 
 export type EditionMaxOrderByAggregateInput = {
@@ -540,6 +610,9 @@ export type EditionMaxOrderByAggregateInput = {
   isDateConfirmed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  displayLabel?: Prisma.SortOrder
+  endYear?: Prisma.SortOrder
+  startYear?: Prisma.SortOrder
 }
 
 export type EditionMinOrderByAggregateInput = {
@@ -554,10 +627,15 @@ export type EditionMinOrderByAggregateInput = {
   isDateConfirmed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  displayLabel?: Prisma.SortOrder
+  endYear?: Prisma.SortOrder
+  startYear?: Prisma.SortOrder
 }
 
 export type EditionSumOrderByAggregateInput = {
   year?: Prisma.SortOrder
+  endYear?: Prisma.SortOrder
+  startYear?: Prisma.SortOrder
 }
 
 export type EditionScalarRelationFilter = {
@@ -591,6 +669,18 @@ export type BoolFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type EditionCreateNestedOneWithoutTeamsInput = {
@@ -732,14 +822,17 @@ export type EditionCreateWithoutTeamsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventCreateNestedManyWithoutEditionInput
+  facultyMembers?: Prisma.FacultyMemberCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
   sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
   teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
-  facultyMembers?: Prisma.FacultyMemberCreateNestedManyWithoutEditionInput
 }
 
 export type EditionUncheckedCreateWithoutTeamsInput = {
@@ -755,14 +848,17 @@ export type EditionUncheckedCreateWithoutTeamsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
+  facultyMembers?: Prisma.FacultyMemberUncheckedCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
   sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
   teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
-  facultyMembers?: Prisma.FacultyMemberUncheckedCreateNestedManyWithoutEditionInput
 }
 
 export type EditionCreateOrConnectWithoutTeamsInput = {
@@ -794,14 +890,17 @@ export type EditionUpdateWithoutTeamsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
+  facultyMembers?: Prisma.FacultyMemberUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
   sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
   teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
-  facultyMembers?: Prisma.FacultyMemberUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionUncheckedUpdateWithoutTeamsInput = {
@@ -817,14 +916,17 @@ export type EditionUncheckedUpdateWithoutTeamsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
+  facultyMembers?: Prisma.FacultyMemberUncheckedUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
   sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
   teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
-  facultyMembers?: Prisma.FacultyMemberUncheckedUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionCreateWithoutTeamMembersInput = {
@@ -840,14 +942,17 @@ export type EditionCreateWithoutTeamMembersInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventCreateNestedManyWithoutEditionInput
+  facultyMembers?: Prisma.FacultyMemberCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
   teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
   galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
-  facultyMembers?: Prisma.FacultyMemberCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
 }
 
 export type EditionUncheckedCreateWithoutTeamMembersInput = {
@@ -863,14 +968,17 @@ export type EditionUncheckedCreateWithoutTeamMembersInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
+  facultyMembers?: Prisma.FacultyMemberUncheckedCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
   teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
   galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
-  facultyMembers?: Prisma.FacultyMemberUncheckedCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
 }
 
 export type EditionCreateOrConnectWithoutTeamMembersInput = {
@@ -902,14 +1010,17 @@ export type EditionUpdateWithoutTeamMembersInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
+  facultyMembers?: Prisma.FacultyMemberUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
   teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
   galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
-  facultyMembers?: Prisma.FacultyMemberUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionUncheckedUpdateWithoutTeamMembersInput = {
@@ -925,14 +1036,17 @@ export type EditionUncheckedUpdateWithoutTeamMembersInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
+  facultyMembers?: Prisma.FacultyMemberUncheckedUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
   teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
   galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
-  facultyMembers?: Prisma.FacultyMemberUncheckedUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionCreateWithoutEventsInput = {
@@ -948,14 +1062,17 @@ export type EditionCreateWithoutEventsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
   facultyMembers?: Prisma.FacultyMemberCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
 }
 
 export type EditionUncheckedCreateWithoutEventsInput = {
@@ -971,14 +1088,17 @@ export type EditionUncheckedCreateWithoutEventsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
   facultyMembers?: Prisma.FacultyMemberUncheckedCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
 }
 
 export type EditionCreateOrConnectWithoutEventsInput = {
@@ -1010,14 +1130,17 @@ export type EditionUpdateWithoutEventsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
   facultyMembers?: Prisma.FacultyMemberUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionUncheckedUpdateWithoutEventsInput = {
@@ -1033,14 +1156,17 @@ export type EditionUncheckedUpdateWithoutEventsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
   facultyMembers?: Prisma.FacultyMemberUncheckedUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionCreateWithoutScheduleEntriesInput = {
@@ -1056,14 +1182,17 @@ export type EditionCreateWithoutScheduleEntriesInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventCreateNestedManyWithoutEditionInput
   facultyMembers?: Prisma.FacultyMemberCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
 }
 
 export type EditionUncheckedCreateWithoutScheduleEntriesInput = {
@@ -1079,14 +1208,17 @@ export type EditionUncheckedCreateWithoutScheduleEntriesInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
   facultyMembers?: Prisma.FacultyMemberUncheckedCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
 }
 
 export type EditionCreateOrConnectWithoutScheduleEntriesInput = {
@@ -1118,14 +1250,17 @@ export type EditionUpdateWithoutScheduleEntriesInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
   facultyMembers?: Prisma.FacultyMemberUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionUncheckedUpdateWithoutScheduleEntriesInput = {
@@ -1141,14 +1276,17 @@ export type EditionUncheckedUpdateWithoutScheduleEntriesInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
   facultyMembers?: Prisma.FacultyMemberUncheckedUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionCreateWithoutAnnouncementsInput = {
@@ -1164,14 +1302,17 @@ export type EditionCreateWithoutAnnouncementsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   events?: Prisma.EventCreateNestedManyWithoutEditionInput
+  facultyMembers?: Prisma.FacultyMemberCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
   scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
   sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
   teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
-  facultyMembers?: Prisma.FacultyMemberCreateNestedManyWithoutEditionInput
 }
 
 export type EditionUncheckedCreateWithoutAnnouncementsInput = {
@@ -1187,14 +1328,17 @@ export type EditionUncheckedCreateWithoutAnnouncementsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
+  facultyMembers?: Prisma.FacultyMemberUncheckedCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
   scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
   sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
   teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
-  facultyMembers?: Prisma.FacultyMemberUncheckedCreateNestedManyWithoutEditionInput
 }
 
 export type EditionCreateOrConnectWithoutAnnouncementsInput = {
@@ -1226,14 +1370,17 @@ export type EditionUpdateWithoutAnnouncementsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   events?: Prisma.EventUpdateManyWithoutEditionNestedInput
+  facultyMembers?: Prisma.FacultyMemberUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
   scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
   sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
   teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
-  facultyMembers?: Prisma.FacultyMemberUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionUncheckedUpdateWithoutAnnouncementsInput = {
@@ -1249,14 +1396,17 @@ export type EditionUncheckedUpdateWithoutAnnouncementsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
+  facultyMembers?: Prisma.FacultyMemberUncheckedUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
   scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
   sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
   teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
-  facultyMembers?: Prisma.FacultyMemberUncheckedUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionCreateWithoutSponsorsInput = {
@@ -1272,14 +1422,17 @@ export type EditionCreateWithoutSponsorsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventCreateNestedManyWithoutEditionInput
   facultyMembers?: Prisma.FacultyMemberCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
 }
 
 export type EditionUncheckedCreateWithoutSponsorsInput = {
@@ -1295,14 +1448,17 @@ export type EditionUncheckedCreateWithoutSponsorsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
   facultyMembers?: Prisma.FacultyMemberUncheckedCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
 }
 
 export type EditionCreateOrConnectWithoutSponsorsInput = {
@@ -1334,14 +1490,17 @@ export type EditionUpdateWithoutSponsorsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
   facultyMembers?: Prisma.FacultyMemberUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionUncheckedUpdateWithoutSponsorsInput = {
@@ -1357,14 +1516,17 @@ export type EditionUncheckedUpdateWithoutSponsorsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
   facultyMembers?: Prisma.FacultyMemberUncheckedUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionCreateWithoutGalleryItemsInput = {
@@ -1380,14 +1542,17 @@ export type EditionCreateWithoutGalleryItemsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventCreateNestedManyWithoutEditionInput
   facultyMembers?: Prisma.FacultyMemberCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
 }
 
 export type EditionUncheckedCreateWithoutGalleryItemsInput = {
@@ -1403,14 +1568,17 @@ export type EditionUncheckedCreateWithoutGalleryItemsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
   facultyMembers?: Prisma.FacultyMemberUncheckedCreateNestedManyWithoutEditionInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
 }
 
 export type EditionCreateOrConnectWithoutGalleryItemsInput = {
@@ -1442,14 +1610,17 @@ export type EditionUpdateWithoutGalleryItemsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
   facultyMembers?: Prisma.FacultyMemberUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionUncheckedUpdateWithoutGalleryItemsInput = {
@@ -1465,14 +1636,17 @@ export type EditionUncheckedUpdateWithoutGalleryItemsInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
-  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
   facultyMembers?: Prisma.FacultyMemberUncheckedUpdateManyWithoutEditionNestedInput
+  festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionCreateWithoutFestivalLinksInput = {
@@ -1488,14 +1662,17 @@ export type EditionCreateWithoutFestivalLinksInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventCreateNestedManyWithoutEditionInput
   facultyMembers?: Prisma.FacultyMemberCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
 }
 
 export type EditionUncheckedCreateWithoutFestivalLinksInput = {
@@ -1511,14 +1688,17 @@ export type EditionUncheckedCreateWithoutFestivalLinksInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
   facultyMembers?: Prisma.FacultyMemberUncheckedCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
 }
 
 export type EditionCreateOrConnectWithoutFestivalLinksInput = {
@@ -1550,14 +1730,17 @@ export type EditionUpdateWithoutFestivalLinksInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
   facultyMembers?: Prisma.FacultyMemberUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionUncheckedUpdateWithoutFestivalLinksInput = {
@@ -1573,14 +1756,17 @@ export type EditionUncheckedUpdateWithoutFestivalLinksInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
   facultyMembers?: Prisma.FacultyMemberUncheckedUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionCreateWithoutFacultyMembersInput = {
@@ -1596,14 +1782,17 @@ export type EditionCreateWithoutFacultyMembersInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventCreateNestedManyWithoutEditionInput
   festivalLinks?: Prisma.FestivalLinkCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutEditionInput
 }
 
 export type EditionUncheckedCreateWithoutFacultyMembersInput = {
@@ -1619,14 +1808,17 @@ export type EditionUncheckedCreateWithoutFacultyMembersInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  displayLabel?: string | null
+  endYear?: number | null
+  startYear?: number | null
   announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutEditionInput
-  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
-  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
-  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
-  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutEditionInput
   festivalLinks?: Prisma.FestivalLinkUncheckedCreateNestedManyWithoutEditionInput
+  teams?: Prisma.FestivalTeamUncheckedCreateNestedManyWithoutEditionInput
+  galleryItems?: Prisma.GalleryItemUncheckedCreateNestedManyWithoutEditionInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedCreateNestedManyWithoutEditionInput
+  sponsors?: Prisma.SponsorUncheckedCreateNestedManyWithoutEditionInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutEditionInput
 }
 
 export type EditionCreateOrConnectWithoutFacultyMembersInput = {
@@ -1658,14 +1850,17 @@ export type EditionUpdateWithoutFacultyMembersInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUpdateManyWithoutEditionNestedInput
   festivalLinks?: Prisma.FestivalLinkUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutEditionNestedInput
 }
 
 export type EditionUncheckedUpdateWithoutFacultyMembersInput = {
@@ -1681,14 +1876,17 @@ export type EditionUncheckedUpdateWithoutFacultyMembersInput = {
   themeSettings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
-  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  displayLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  endYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutEditionNestedInput
-  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
-  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
-  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
-  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutEditionNestedInput
   festivalLinks?: Prisma.FestivalLinkUncheckedUpdateManyWithoutEditionNestedInput
+  teams?: Prisma.FestivalTeamUncheckedUpdateManyWithoutEditionNestedInput
+  galleryItems?: Prisma.GalleryItemUncheckedUpdateManyWithoutEditionNestedInput
+  scheduleEntries?: Prisma.ScheduleEntryUncheckedUpdateManyWithoutEditionNestedInput
+  sponsors?: Prisma.SponsorUncheckedUpdateManyWithoutEditionNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutEditionNestedInput
 }
 
 
@@ -1697,27 +1895,27 @@ export type EditionUncheckedUpdateWithoutFacultyMembersInput = {
  */
 
 export type EditionCountOutputType = {
-  events: number
-  scheduleEntries: number
   announcements: number
-  sponsors: number
-  teams: number
-  teamMembers: number
-  galleryItems: number
-  festivalLinks: number
+  events: number
   facultyMembers: number
+  festivalLinks: number
+  teams: number
+  galleryItems: number
+  scheduleEntries: number
+  sponsors: number
+  teamMembers: number
 }
 
 export type EditionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  events?: boolean | EditionCountOutputTypeCountEventsArgs
-  scheduleEntries?: boolean | EditionCountOutputTypeCountScheduleEntriesArgs
   announcements?: boolean | EditionCountOutputTypeCountAnnouncementsArgs
-  sponsors?: boolean | EditionCountOutputTypeCountSponsorsArgs
-  teams?: boolean | EditionCountOutputTypeCountTeamsArgs
-  teamMembers?: boolean | EditionCountOutputTypeCountTeamMembersArgs
-  galleryItems?: boolean | EditionCountOutputTypeCountGalleryItemsArgs
-  festivalLinks?: boolean | EditionCountOutputTypeCountFestivalLinksArgs
+  events?: boolean | EditionCountOutputTypeCountEventsArgs
   facultyMembers?: boolean | EditionCountOutputTypeCountFacultyMembersArgs
+  festivalLinks?: boolean | EditionCountOutputTypeCountFestivalLinksArgs
+  teams?: boolean | EditionCountOutputTypeCountTeamsArgs
+  galleryItems?: boolean | EditionCountOutputTypeCountGalleryItemsArgs
+  scheduleEntries?: boolean | EditionCountOutputTypeCountScheduleEntriesArgs
+  sponsors?: boolean | EditionCountOutputTypeCountSponsorsArgs
+  teamMembers?: boolean | EditionCountOutputTypeCountTeamMembersArgs
 }
 
 /**
@@ -1733,20 +1931,6 @@ export type EditionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * EditionCountOutputType without action
  */
-export type EditionCountOutputTypeCountEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.EventWhereInput
-}
-
-/**
- * EditionCountOutputType without action
- */
-export type EditionCountOutputTypeCountScheduleEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ScheduleEntryWhereInput
-}
-
-/**
- * EditionCountOutputType without action
- */
 export type EditionCountOutputTypeCountAnnouncementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AnnouncementWhereInput
 }
@@ -1754,29 +1938,15 @@ export type EditionCountOutputTypeCountAnnouncementsArgs<ExtArgs extends runtime
 /**
  * EditionCountOutputType without action
  */
-export type EditionCountOutputTypeCountSponsorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SponsorWhereInput
+export type EditionCountOutputTypeCountEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EventWhereInput
 }
 
 /**
  * EditionCountOutputType without action
  */
-export type EditionCountOutputTypeCountTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FestivalTeamWhereInput
-}
-
-/**
- * EditionCountOutputType without action
- */
-export type EditionCountOutputTypeCountTeamMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TeamMemberWhereInput
-}
-
-/**
- * EditionCountOutputType without action
- */
-export type EditionCountOutputTypeCountGalleryItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.GalleryItemWhereInput
+export type EditionCountOutputTypeCountFacultyMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FacultyMemberWhereInput
 }
 
 /**
@@ -1789,8 +1959,36 @@ export type EditionCountOutputTypeCountFestivalLinksArgs<ExtArgs extends runtime
 /**
  * EditionCountOutputType without action
  */
-export type EditionCountOutputTypeCountFacultyMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FacultyMemberWhereInput
+export type EditionCountOutputTypeCountTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FestivalTeamWhereInput
+}
+
+/**
+ * EditionCountOutputType without action
+ */
+export type EditionCountOutputTypeCountGalleryItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GalleryItemWhereInput
+}
+
+/**
+ * EditionCountOutputType without action
+ */
+export type EditionCountOutputTypeCountScheduleEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ScheduleEntryWhereInput
+}
+
+/**
+ * EditionCountOutputType without action
+ */
+export type EditionCountOutputTypeCountSponsorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SponsorWhereInput
+}
+
+/**
+ * EditionCountOutputType without action
+ */
+export type EditionCountOutputTypeCountTeamMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TeamMemberWhereInput
 }
 
 
@@ -1807,15 +2005,18 @@ export type EditionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   themeSettings?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  events?: boolean | Prisma.Edition$eventsArgs<ExtArgs>
-  scheduleEntries?: boolean | Prisma.Edition$scheduleEntriesArgs<ExtArgs>
+  displayLabel?: boolean
+  endYear?: boolean
+  startYear?: boolean
   announcements?: boolean | Prisma.Edition$announcementsArgs<ExtArgs>
-  sponsors?: boolean | Prisma.Edition$sponsorsArgs<ExtArgs>
-  teams?: boolean | Prisma.Edition$teamsArgs<ExtArgs>
-  teamMembers?: boolean | Prisma.Edition$teamMembersArgs<ExtArgs>
-  galleryItems?: boolean | Prisma.Edition$galleryItemsArgs<ExtArgs>
-  festivalLinks?: boolean | Prisma.Edition$festivalLinksArgs<ExtArgs>
+  events?: boolean | Prisma.Edition$eventsArgs<ExtArgs>
   facultyMembers?: boolean | Prisma.Edition$facultyMembersArgs<ExtArgs>
+  festivalLinks?: boolean | Prisma.Edition$festivalLinksArgs<ExtArgs>
+  teams?: boolean | Prisma.Edition$teamsArgs<ExtArgs>
+  galleryItems?: boolean | Prisma.Edition$galleryItemsArgs<ExtArgs>
+  scheduleEntries?: boolean | Prisma.Edition$scheduleEntriesArgs<ExtArgs>
+  sponsors?: boolean | Prisma.Edition$sponsorsArgs<ExtArgs>
+  teamMembers?: boolean | Prisma.Edition$teamMembersArgs<ExtArgs>
   _count?: boolean | Prisma.EditionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["edition"]>
 
@@ -1832,6 +2033,9 @@ export type EditionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   themeSettings?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  displayLabel?: boolean
+  endYear?: boolean
+  startYear?: boolean
 }, ExtArgs["result"]["edition"]>
 
 export type EditionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1847,6 +2051,9 @@ export type EditionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   themeSettings?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  displayLabel?: boolean
+  endYear?: boolean
+  startYear?: boolean
 }, ExtArgs["result"]["edition"]>
 
 export type EditionSelectScalar = {
@@ -1862,19 +2069,22 @@ export type EditionSelectScalar = {
   themeSettings?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  displayLabel?: boolean
+  endYear?: boolean
+  startYear?: boolean
 }
 
-export type EditionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "year" | "status" | "startDate" | "endDate" | "countdownTarget" | "isDateConfirmed" | "themeSettings" | "createdAt" | "updatedAt", ExtArgs["result"]["edition"]>
+export type EditionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "year" | "status" | "startDate" | "endDate" | "countdownTarget" | "isDateConfirmed" | "themeSettings" | "createdAt" | "updatedAt" | "displayLabel" | "endYear" | "startYear", ExtArgs["result"]["edition"]>
 export type EditionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  events?: boolean | Prisma.Edition$eventsArgs<ExtArgs>
-  scheduleEntries?: boolean | Prisma.Edition$scheduleEntriesArgs<ExtArgs>
   announcements?: boolean | Prisma.Edition$announcementsArgs<ExtArgs>
-  sponsors?: boolean | Prisma.Edition$sponsorsArgs<ExtArgs>
-  teams?: boolean | Prisma.Edition$teamsArgs<ExtArgs>
-  teamMembers?: boolean | Prisma.Edition$teamMembersArgs<ExtArgs>
-  galleryItems?: boolean | Prisma.Edition$galleryItemsArgs<ExtArgs>
-  festivalLinks?: boolean | Prisma.Edition$festivalLinksArgs<ExtArgs>
+  events?: boolean | Prisma.Edition$eventsArgs<ExtArgs>
   facultyMembers?: boolean | Prisma.Edition$facultyMembersArgs<ExtArgs>
+  festivalLinks?: boolean | Prisma.Edition$festivalLinksArgs<ExtArgs>
+  teams?: boolean | Prisma.Edition$teamsArgs<ExtArgs>
+  galleryItems?: boolean | Prisma.Edition$galleryItemsArgs<ExtArgs>
+  scheduleEntries?: boolean | Prisma.Edition$scheduleEntriesArgs<ExtArgs>
+  sponsors?: boolean | Prisma.Edition$sponsorsArgs<ExtArgs>
+  teamMembers?: boolean | Prisma.Edition$teamMembersArgs<ExtArgs>
   _count?: boolean | Prisma.EditionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EditionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1883,15 +2093,15 @@ export type EditionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $EditionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Edition"
   objects: {
-    events: Prisma.$EventPayload<ExtArgs>[]
-    scheduleEntries: Prisma.$ScheduleEntryPayload<ExtArgs>[]
     announcements: Prisma.$AnnouncementPayload<ExtArgs>[]
-    sponsors: Prisma.$SponsorPayload<ExtArgs>[]
-    teams: Prisma.$FestivalTeamPayload<ExtArgs>[]
-    teamMembers: Prisma.$TeamMemberPayload<ExtArgs>[]
-    galleryItems: Prisma.$GalleryItemPayload<ExtArgs>[]
-    festivalLinks: Prisma.$FestivalLinkPayload<ExtArgs>[]
+    events: Prisma.$EventPayload<ExtArgs>[]
     facultyMembers: Prisma.$FacultyMemberPayload<ExtArgs>[]
+    festivalLinks: Prisma.$FestivalLinkPayload<ExtArgs>[]
+    teams: Prisma.$FestivalTeamPayload<ExtArgs>[]
+    galleryItems: Prisma.$GalleryItemPayload<ExtArgs>[]
+    scheduleEntries: Prisma.$ScheduleEntryPayload<ExtArgs>[]
+    sponsors: Prisma.$SponsorPayload<ExtArgs>[]
+    teamMembers: Prisma.$TeamMemberPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1906,6 +2116,9 @@ export type $EditionPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     themeSettings: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
+    displayLabel: string | null
+    endYear: number | null
+    startYear: number | null
   }, ExtArgs["result"]["edition"]>
   composites: {}
 }
@@ -2300,15 +2513,15 @@ readonly fields: EditionFieldRefs;
  */
 export interface Prisma__EditionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  events<T extends Prisma.Edition$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  scheduleEntries<T extends Prisma.Edition$scheduleEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$scheduleEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScheduleEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   announcements<T extends Prisma.Edition$announcementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$announcementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  sponsors<T extends Prisma.Edition$sponsorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$sponsorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SponsorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  teams<T extends Prisma.Edition$teamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$teamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FestivalTeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  teamMembers<T extends Prisma.Edition$teamMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$teamMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  galleryItems<T extends Prisma.Edition$galleryItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$galleryItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GalleryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  festivalLinks<T extends Prisma.Edition$festivalLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$festivalLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FestivalLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  events<T extends Prisma.Edition$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   facultyMembers<T extends Prisma.Edition$facultyMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$facultyMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FacultyMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  festivalLinks<T extends Prisma.Edition$festivalLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$festivalLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FestivalLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  teams<T extends Prisma.Edition$teamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$teamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FestivalTeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  galleryItems<T extends Prisma.Edition$galleryItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$galleryItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GalleryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  scheduleEntries<T extends Prisma.Edition$scheduleEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$scheduleEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScheduleEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sponsors<T extends Prisma.Edition$sponsorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$sponsorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SponsorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  teamMembers<T extends Prisma.Edition$teamMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Edition$teamMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2350,6 +2563,9 @@ export interface EditionFieldRefs {
   readonly themeSettings: Prisma.FieldRef<"Edition", 'Json'>
   readonly createdAt: Prisma.FieldRef<"Edition", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Edition", 'DateTime'>
+  readonly displayLabel: Prisma.FieldRef<"Edition", 'String'>
+  readonly endYear: Prisma.FieldRef<"Edition", 'Int'>
+  readonly startYear: Prisma.FieldRef<"Edition", 'Int'>
 }
     
 
@@ -2743,54 +2959,6 @@ export type EditionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Edition.events
- */
-export type Edition$eventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Event
-   */
-  select?: Prisma.EventSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Event
-   */
-  omit?: Prisma.EventOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.EventInclude<ExtArgs> | null
-  where?: Prisma.EventWhereInput
-  orderBy?: Prisma.EventOrderByWithRelationInput | Prisma.EventOrderByWithRelationInput[]
-  cursor?: Prisma.EventWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.EventScalarFieldEnum | Prisma.EventScalarFieldEnum[]
-}
-
-/**
- * Edition.scheduleEntries
- */
-export type Edition$scheduleEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ScheduleEntry
-   */
-  select?: Prisma.ScheduleEntrySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ScheduleEntry
-   */
-  omit?: Prisma.ScheduleEntryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ScheduleEntryInclude<ExtArgs> | null
-  where?: Prisma.ScheduleEntryWhereInput
-  orderBy?: Prisma.ScheduleEntryOrderByWithRelationInput | Prisma.ScheduleEntryOrderByWithRelationInput[]
-  cursor?: Prisma.ScheduleEntryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ScheduleEntryScalarFieldEnum | Prisma.ScheduleEntryScalarFieldEnum[]
-}
-
-/**
  * Edition.announcements
  */
 export type Edition$announcementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2815,99 +2983,51 @@ export type Edition$announcementsArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
- * Edition.sponsors
+ * Edition.events
  */
-export type Edition$sponsorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Edition$eventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Sponsor
+   * Select specific fields to fetch from the Event
    */
-  select?: Prisma.SponsorSelect<ExtArgs> | null
+  select?: Prisma.EventSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Sponsor
+   * Omit specific fields from the Event
    */
-  omit?: Prisma.SponsorOmit<ExtArgs> | null
+  omit?: Prisma.EventOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SponsorInclude<ExtArgs> | null
-  where?: Prisma.SponsorWhereInput
-  orderBy?: Prisma.SponsorOrderByWithRelationInput | Prisma.SponsorOrderByWithRelationInput[]
-  cursor?: Prisma.SponsorWhereUniqueInput
+  include?: Prisma.EventInclude<ExtArgs> | null
+  where?: Prisma.EventWhereInput
+  orderBy?: Prisma.EventOrderByWithRelationInput | Prisma.EventOrderByWithRelationInput[]
+  cursor?: Prisma.EventWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SponsorScalarFieldEnum | Prisma.SponsorScalarFieldEnum[]
+  distinct?: Prisma.EventScalarFieldEnum | Prisma.EventScalarFieldEnum[]
 }
 
 /**
- * Edition.teams
+ * Edition.facultyMembers
  */
-export type Edition$teamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Edition$facultyMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the FestivalTeam
+   * Select specific fields to fetch from the FacultyMember
    */
-  select?: Prisma.FestivalTeamSelect<ExtArgs> | null
+  select?: Prisma.FacultyMemberSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the FestivalTeam
+   * Omit specific fields from the FacultyMember
    */
-  omit?: Prisma.FestivalTeamOmit<ExtArgs> | null
+  omit?: Prisma.FacultyMemberOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.FestivalTeamInclude<ExtArgs> | null
-  where?: Prisma.FestivalTeamWhereInput
-  orderBy?: Prisma.FestivalTeamOrderByWithRelationInput | Prisma.FestivalTeamOrderByWithRelationInput[]
-  cursor?: Prisma.FestivalTeamWhereUniqueInput
+  include?: Prisma.FacultyMemberInclude<ExtArgs> | null
+  where?: Prisma.FacultyMemberWhereInput
+  orderBy?: Prisma.FacultyMemberOrderByWithRelationInput | Prisma.FacultyMemberOrderByWithRelationInput[]
+  cursor?: Prisma.FacultyMemberWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.FestivalTeamScalarFieldEnum | Prisma.FestivalTeamScalarFieldEnum[]
-}
-
-/**
- * Edition.teamMembers
- */
-export type Edition$teamMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the TeamMember
-   */
-  select?: Prisma.TeamMemberSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the TeamMember
-   */
-  omit?: Prisma.TeamMemberOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TeamMemberInclude<ExtArgs> | null
-  where?: Prisma.TeamMemberWhereInput
-  orderBy?: Prisma.TeamMemberOrderByWithRelationInput | Prisma.TeamMemberOrderByWithRelationInput[]
-  cursor?: Prisma.TeamMemberWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TeamMemberScalarFieldEnum | Prisma.TeamMemberScalarFieldEnum[]
-}
-
-/**
- * Edition.galleryItems
- */
-export type Edition$galleryItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the GalleryItem
-   */
-  select?: Prisma.GalleryItemSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the GalleryItem
-   */
-  omit?: Prisma.GalleryItemOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.GalleryItemInclude<ExtArgs> | null
-  where?: Prisma.GalleryItemWhereInput
-  orderBy?: Prisma.GalleryItemOrderByWithRelationInput | Prisma.GalleryItemOrderByWithRelationInput[]
-  cursor?: Prisma.GalleryItemWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.GalleryItemScalarFieldEnum | Prisma.GalleryItemScalarFieldEnum[]
+  distinct?: Prisma.FacultyMemberScalarFieldEnum | Prisma.FacultyMemberScalarFieldEnum[]
 }
 
 /**
@@ -2935,27 +3055,123 @@ export type Edition$festivalLinksArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
- * Edition.facultyMembers
+ * Edition.teams
  */
-export type Edition$facultyMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Edition$teamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the FacultyMember
+   * Select specific fields to fetch from the FestivalTeam
    */
-  select?: Prisma.FacultyMemberSelect<ExtArgs> | null
+  select?: Prisma.FestivalTeamSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the FacultyMember
+   * Omit specific fields from the FestivalTeam
    */
-  omit?: Prisma.FacultyMemberOmit<ExtArgs> | null
+  omit?: Prisma.FestivalTeamOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.FacultyMemberInclude<ExtArgs> | null
-  where?: Prisma.FacultyMemberWhereInput
-  orderBy?: Prisma.FacultyMemberOrderByWithRelationInput | Prisma.FacultyMemberOrderByWithRelationInput[]
-  cursor?: Prisma.FacultyMemberWhereUniqueInput
+  include?: Prisma.FestivalTeamInclude<ExtArgs> | null
+  where?: Prisma.FestivalTeamWhereInput
+  orderBy?: Prisma.FestivalTeamOrderByWithRelationInput | Prisma.FestivalTeamOrderByWithRelationInput[]
+  cursor?: Prisma.FestivalTeamWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.FacultyMemberScalarFieldEnum | Prisma.FacultyMemberScalarFieldEnum[]
+  distinct?: Prisma.FestivalTeamScalarFieldEnum | Prisma.FestivalTeamScalarFieldEnum[]
+}
+
+/**
+ * Edition.galleryItems
+ */
+export type Edition$galleryItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GalleryItem
+   */
+  select?: Prisma.GalleryItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GalleryItem
+   */
+  omit?: Prisma.GalleryItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GalleryItemInclude<ExtArgs> | null
+  where?: Prisma.GalleryItemWhereInput
+  orderBy?: Prisma.GalleryItemOrderByWithRelationInput | Prisma.GalleryItemOrderByWithRelationInput[]
+  cursor?: Prisma.GalleryItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GalleryItemScalarFieldEnum | Prisma.GalleryItemScalarFieldEnum[]
+}
+
+/**
+ * Edition.scheduleEntries
+ */
+export type Edition$scheduleEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ScheduleEntry
+   */
+  select?: Prisma.ScheduleEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ScheduleEntry
+   */
+  omit?: Prisma.ScheduleEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ScheduleEntryInclude<ExtArgs> | null
+  where?: Prisma.ScheduleEntryWhereInput
+  orderBy?: Prisma.ScheduleEntryOrderByWithRelationInput | Prisma.ScheduleEntryOrderByWithRelationInput[]
+  cursor?: Prisma.ScheduleEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ScheduleEntryScalarFieldEnum | Prisma.ScheduleEntryScalarFieldEnum[]
+}
+
+/**
+ * Edition.sponsors
+ */
+export type Edition$sponsorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Sponsor
+   */
+  select?: Prisma.SponsorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Sponsor
+   */
+  omit?: Prisma.SponsorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SponsorInclude<ExtArgs> | null
+  where?: Prisma.SponsorWhereInput
+  orderBy?: Prisma.SponsorOrderByWithRelationInput | Prisma.SponsorOrderByWithRelationInput[]
+  cursor?: Prisma.SponsorWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SponsorScalarFieldEnum | Prisma.SponsorScalarFieldEnum[]
+}
+
+/**
+ * Edition.teamMembers
+ */
+export type Edition$teamMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TeamMember
+   */
+  select?: Prisma.TeamMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TeamMember
+   */
+  omit?: Prisma.TeamMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TeamMemberInclude<ExtArgs> | null
+  where?: Prisma.TeamMemberWhereInput
+  orderBy?: Prisma.TeamMemberOrderByWithRelationInput | Prisma.TeamMemberOrderByWithRelationInput[]
+  cursor?: Prisma.TeamMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TeamMemberScalarFieldEnum | Prisma.TeamMemberScalarFieldEnum[]
 }
 
 /**

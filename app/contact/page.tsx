@@ -23,7 +23,7 @@ import {
 export const metadata: Metadata = {
   title: "Contact Desk & Campus Venue Directions",
   description:
-    "Official contact directory, secretariat desks, PR liaison, and transit directions for YATHARTH '26 at the Department of Journalism, Maharaja Agrasen College (University of Delhi).",
+    "Official contact directory, secretariat desks, PR liaison, and transit directions for YATHARTH at the Department of Journalism, Maharaja Agrasen College (University of Delhi).",
 };
 
 const DEFAULT_SETTINGS: ContactPageSettings = {

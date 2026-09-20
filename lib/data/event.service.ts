@@ -200,8 +200,95 @@ export async function getEventBySlug(slug: string): Promise<Event | null> {
   };
 }
 
+export async function getEventById(id: string): Promise<Event | null> {
+  const isDemo = process.env.DATA_SOURCE === "demo";
+
+  if (isDemo) {
+    const found = DEMO_EVENTS.find((e) => e.id === id);
+    if (!found) return null;
+    return {
+      ...found,
+      registrationEnabled:
+        found.registrationEnabled !== undefined
+          ? found.registrationEnabled
+          : found.registrationStatus !== "NOT_AVAILABLE",
+    };
+  }
+
+  const e = await prisma.event.findUnique({
+    where: { id },
+    include: {
+      venue: true,
+      coordinators: {
+        include: {
+          person: true,
+        },
+        orderBy: { displayOrder: "asc" },
+      },
+    },
+  });
+
+  if (!e) return null;
+
+  const coordinators: EventCoordinator[] = e.coordinators.map((c) => ({
+    id: c.id,
+    eventId: c.eventId,
+    personId: c.personId,
+    role: c.role as CoordinatorRole,
+    contactOverride: c.contactOverride,
+    displayOrder: c.displayOrder,
+    person: c.person
+      ? {
+          id: c.person.id,
+          name: c.person.name,
+          email: c.person.email,
+          phone: c.person.phone,
+          avatarUrl: c.person.avatarUrl,
+          bio: c.person.bio,
+          socialLinks: c.person.socialLinks as Record<string, string> | null,
+        }
+      : undefined,
+  }));
+
+  return {
+    id: e.id,
+    editionId: e.editionId,
+    slug: e.slug,
+    title: e.title,
+    category: e.category,
+    shortDescription: e.shortDescription,
+    fullDescription: e.fullDescription,
+    rules: e.rules,
+    prizes: e.prizes,
+    eligibility: e.eligibility,
+    participationType: e.participationType as Event["participationType"],
+    teamSizeLimit: e.teamSizeLimit,
+    registrationStatus: e.registrationStatus as Event["registrationStatus"],
+    registrationUrl: e.registrationUrl,
+    registrationEnabled: e.registrationStatus !== "NOT_AVAILABLE",
+    venueId: e.venueId,
+    displayOrder: e.displayOrder,
+    posterUrl: e.posterUrl,
+    published: e.published,
+    venue: e.venue
+      ? {
+          id: e.venue.id,
+          name: e.venue.name,
+          building: e.venue.building,
+          floor: e.venue.floor,
+          roomNumber: e.venue.roomNumber,
+          capacity: e.venue.capacity,
+          mapUrl: e.venue.mapUrl,
+          directions: e.venue.directions,
+        }
+      : null,
+    coordinators,
+    heads: coordinators, // Backwards compatibility
+  };
+}
+
 export async function updateEventRegistration(
-  idOrSlug: string,
+  id: string,
   data: {
     registrationUrl?: string | null;
     registrationStatus: Event["registrationStatus"];
@@ -210,18 +297,17 @@ export async function updateEventRegistration(
 ): Promise<Event> {
   const isDemo = process.env.DATA_SOURCE === "demo";
 
-  const isEnabled = data.registrationEnabled !== undefined
-    ? data.registrationEnabled
-    : data.registrationStatus !== "NOT_AVAILABLE";
+  const isEnabled =
+    data.registrationEnabled !== undefined
+      ? data.registrationEnabled
+      : data.registrationStatus !== "NOT_AVAILABLE";
 
-  const effectiveStatus = !isEnabled
-    ? "NOT_AVAILABLE"
-    : data.registrationStatus;
+  const effectiveStatus = !isEnabled ? "NOT_AVAILABLE" : data.registrationStatus;
 
   if (isDemo) {
-    const event = DEMO_EVENTS.find((e) => e.id === idOrSlug || e.slug === idOrSlug);
+    const event = DEMO_EVENTS.find((e) => e.id === id);
     if (!event) {
-      throw new Error(`Event not found: ${idOrSlug}`);
+      throw new Error("This event no longer exists. Refresh the Events list.");
     }
     event.registrationUrl = data.registrationUrl ?? null;
     event.registrationStatus = effectiveStatus as Event["registrationStatus"];
@@ -229,10 +315,15 @@ export async function updateEventRegistration(
     return event;
   }
 
+  const existing = await prisma.event.findUnique({
+    where: { id },
+  });
+  if (!existing) {
+    throw new Error("This event no longer exists. Refresh the Events list.");
+  }
+
   const updated = await prisma.event.update({
-    where: idOrSlug.includes("-") && !idOrSlug.startsWith("evt-")
-      ? { slug: idOrSlug }
-      : { id: idOrSlug },
+    where: { id },
     data: {
       registrationUrl: data.registrationUrl ?? null,
       registrationStatus: effectiveStatus as import("@/generated/prisma").RegistrationStatus,
@@ -453,14 +544,21 @@ export async function updateEvent(
   const isDemo = process.env.DATA_SOURCE === "demo";
 
   if (isDemo) {
-    const found = DEMO_EVENTS.find((e) => e.id === id || e.slug === id);
-    if (!found) throw new Error(`Event not found: ${id}`);
+    const found = DEMO_EVENTS.find((e) => e.id === id);
+    if (!found) throw new Error("This event no longer exists. Refresh the Events list.");
     Object.assign(found, data);
     return found;
   }
 
+  const existing = await prisma.event.findUnique({
+    where: { id },
+  });
+  if (!existing) {
+    throw new Error("This event no longer exists. Refresh the Events list.");
+  }
+
   const updated = await prisma.event.update({
-    where: id.includes("-") && !id.startsWith("evt-") ? { slug: id } : { id },
+    where: { id },
     data: {
       ...(data.title ? { title: data.title } : {}),
       ...(data.slug ? { slug: data.slug } : {}),
@@ -469,6 +567,9 @@ export async function updateEvent(
       ...(data.fullDescription !== undefined ? { fullDescription: data.fullDescription } : {}),
       ...(data.rules !== undefined ? { rules: data.rules } : {}),
       ...(data.prizes !== undefined ? { prizes: data.prizes } : {}),
+      ...(data.eligibility !== undefined ? { eligibility: data.eligibility } : {}),
+      ...(data.participationType ? { participationType: data.participationType } : {}),
+      ...(data.teamSizeLimit !== undefined ? { teamSizeLimit: data.teamSizeLimit } : {}),
       ...(data.posterUrl !== undefined ? { posterUrl: data.posterUrl } : {}),
       ...(data.published !== undefined ? { published: data.published } : {}),
       ...(data.displayOrder !== undefined ? { displayOrder: data.displayOrder } : {}),
@@ -520,16 +621,23 @@ export async function deleteEvent(id: string): Promise<boolean> {
   const isDemo = process.env.DATA_SOURCE === "demo";
 
   if (isDemo) {
-    const idx = DEMO_EVENTS.findIndex((e) => e.id === id || e.slug === id);
+    const idx = DEMO_EVENTS.findIndex((e) => e.id === id);
     if (idx !== -1) {
       DEMO_EVENTS.splice(idx, 1);
       return true;
     }
-    return false;
+    throw new Error("This event no longer exists. Refresh the Events list.");
+  }
+
+  const existing = await prisma.event.findUnique({
+    where: { id },
+  });
+  if (!existing) {
+    throw new Error("This event no longer exists. Refresh the Events list.");
   }
 
   await prisma.event.delete({
-    where: id.includes("-") && !id.startsWith("evt-") ? { slug: id } : { id },
+    where: { id },
   });
   return true;
 }
@@ -548,8 +656,8 @@ export async function addEventCoordinator(
   const role = data.role || "COORDINATOR";
 
   if (isDemo) {
-    const event = DEMO_EVENTS.find((e) => e.id === eventId || e.slug === eventId);
-    if (!event) throw new Error(`Event not found: ${eventId}`);
+    const event = DEMO_EVENTS.find((e) => e.id === eventId);
+    if (!event) throw new Error("This event no longer exists. Refresh the Events list.");
 
     const newCoord: EventCoordinator = {
       id: `coord-${Date.now()}`,
@@ -570,6 +678,13 @@ export async function addEventCoordinator(
     event.coordinators.push(newCoord);
     event.heads = event.coordinators;
     return newCoord;
+  }
+
+  const existingEvent = await prisma.event.findUnique({
+    where: { id: eventId },
+  });
+  if (!existingEvent) {
+    throw new Error("This event no longer exists. Refresh the Events list.");
   }
 
   let person = await prisma.person.findFirst({ where: { name: data.name } });
@@ -626,7 +741,14 @@ export async function removeEventCoordinator(coordinatorId: string): Promise<boo
         }
       }
     }
-    return false;
+    throw new Error("This coordinator no longer exists. Refresh the Events list.");
+  }
+
+  const existing = await prisma.eventCoordinator.findUnique({
+    where: { id: coordinatorId },
+  });
+  if (!existing) {
+    throw new Error("This coordinator no longer exists. Refresh the Events list.");
   }
 
   await prisma.eventCoordinator.delete({ where: { id: coordinatorId } });

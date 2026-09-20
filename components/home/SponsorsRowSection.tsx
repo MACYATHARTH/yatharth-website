@@ -76,7 +76,7 @@ export function SponsorsRowSection({ sponsors }: SponsorsRowSectionProps) {
               <span>Partnership</span>
             </div>
             <h3 className="text-lg sm:text-xl font-bold text-[var(--theme-text-primary)]">
-              Partner with YATHARTH &apos;26
+              Partner with YATHARTH
             </h3>
             <p className="text-xs text-[var(--theme-text-muted)] max-w-xl font-sans">
               Connect your brand, media network, or organization with delegates and creators from top universities nationwide.

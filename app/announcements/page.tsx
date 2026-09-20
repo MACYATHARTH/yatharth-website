@@ -7,7 +7,7 @@ import { Bell } from "lucide-react";
 export const metadata: Metadata = {
   title: "Announcements, Circulars & Official Press Releases",
   description:
-    "Official notices, schedule updates, competition rule clarifications, and media press releases for YATHARTH '26.",
+    "Official notices, schedule updates, competition rule clarifications, and media press releases for YATHARTH.",
 };
 
 export default async function AnnouncementsPage() {

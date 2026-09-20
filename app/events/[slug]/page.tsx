@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getEventBySlug, getEvents } from "@/lib/data/event.service";
 import { getScheduleEntries } from "@/lib/data/schedule.service";
+import { getActiveEdition, formatEditionBranding } from "@/lib/data/edition.service";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { BackToHome } from "@/components/layout/BackToHome";
 import {
@@ -43,10 +44,12 @@ export async function generateMetadata({ params }: EventDetailPageProps): Promis
 
 export default async function EventDetailPage({ params }: EventDetailPageProps) {
   const { slug } = await params;
-  const [event, allSchedule] = await Promise.all([
+  const [event, allSchedule, activeEdition] = await Promise.all([
     getEventBySlug(slug),
     getScheduleEntries(),
+    getActiveEdition().catch(() => null),
   ]);
+  const branding = formatEditionBranding(activeEdition);
 
   if (!event) {
     notFound();
@@ -107,7 +110,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
                 {/* Poster Graphic Identity */}
                 <div className="my-auto flex flex-col items-center text-center py-10">
                   <div className="text-xs font-mono uppercase tracking-[0.3em] text-[var(--theme-accent)] mb-2 font-bold">
-                    YATHARTH &apos;26 &bull; {event.category}
+                    {branding.fullBranding} &bull; {event.category}
                   </div>
                   <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary)] font-varsity tracking-tight max-w-xl leading-tight uppercase">
                     {event.title}

@@ -6,7 +6,7 @@ import { BackToHome } from "@/components/layout/BackToHome";
 export const metadata: Metadata = {
   title: "About the Festival & Department Heritage",
   description:
-    "Explore the history, core principles, leadership messages, and academic pedigree behind YATHARTH '26, hosted by the Department of Journalism at Maharaja Agrasen College, University of Delhi.",
+    "Explore the history, core principles, leadership messages, and academic pedigree behind YATHARTH, hosted by the Department of Journalism at Maharaja Agrasen College, University of Delhi.",
 };
 
 export default async function AboutPage() {
@@ -154,7 +154,7 @@ export default async function AboutPage() {
                 <h3 className="text-base sm:text-lg font-bold text-[var(--theme-text-primary)] mt-1">
                   Faculty Member Name
                 </h3>
-                <p className="text-xs text-[var(--theme-text-muted)] font-mono">Associate Professor &amp; Faculty Convenor, YATHARTH &apos;26</p>
+                <p className="text-xs text-[var(--theme-text-muted)] font-mono">Associate Professor &amp; Faculty Convenor, YATHARTH</p>
               </div>
               <blockquote className="text-xs sm:text-sm text-[var(--theme-text-secondary)] leading-relaxed font-serif italic">
                 &ldquo;Every edition of YATHARTH challenges participants to go beyond theoretical academia and enter high-pressure real-world newsroom conditions. Whether on the teleprompter or tracking grassroots stories with a camera lens, we champion the unadulterated truth.&rdquo;
@@ -232,8 +232,8 @@ export default async function AboutPage() {
             <div className="border-l border-[var(--theme-border)] ml-2 pl-8 space-y-8">
               <div className="relative space-y-1.5">
                 <div className="absolute -left-[37px] top-1.5 w-2.5 h-2.5 bg-[var(--theme-accent)] border border-black"></div>
-                <span className="text-[11px] font-mono text-[var(--theme-accent)] uppercase tracking-wider block font-bold">Edition &bull; 2026</span>
-                <h3 className="text-base font-bold text-[var(--theme-text-primary)]">YATHARTH &apos;26: Voice, Vision &amp; Veracity</h3>
+                <span className="text-[11px] font-mono text-[var(--theme-accent)] uppercase tracking-wider block font-bold">Edition &bull; 2026–27</span>
+                <h3 className="text-base font-bold text-[var(--theme-text-primary)]">YATHARTH ’26–27: Voice, Vision &amp; Veracity</h3>
                 <p className="text-xs text-[var(--theme-text-muted)] leading-relaxed max-w-2xl font-sans">
                   Expanding national participation with dedicated broadcast studio challenges, inter-state delegations, and veteran media masterclasses.
                 </p>

@@ -6,6 +6,7 @@ import { ArrowRight, ArrowDown } from "lucide-react";
 import { Edition } from "@/lib/data/types";
 import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
 import { YatharthLogo } from "@/components/brand/YatharthLogo";
+import { formatEditionBranding } from "@/lib/data/edition-branding";
 
 interface HeroSceneKairoProps {
   edition: Edition;
@@ -13,6 +14,7 @@ interface HeroSceneKairoProps {
 }
 
 export function HeroSceneKairo({ edition, registrationUrl = "/events" }: HeroSceneKairoProps) {
+  const branding = formatEditionBranding(edition);
   const [scrollY, setScrollY] = useState(0);
   const reducedMotion = usePrefersReducedMotion();
 
@@ -72,7 +74,7 @@ export function HeroSceneKairo({ edition, registrationUrl = "/events" }: HeroSce
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--theme-accent)]" />
           <span className="text-[11px] uppercase tracking-[0.2em] text-[var(--theme-text-muted)] font-medium">
-            Annual Festival &bull; University of Delhi
+            {branding.fullBranding} &bull; University of Delhi
           </span>
         </div>
         <div className="text-[11px] tracking-[0.2em] text-[var(--theme-text-muted)] uppercase text-right hidden sm:block">
@@ -96,7 +98,12 @@ export function HeroSceneKairo({ edition, registrationUrl = "/events" }: HeroSce
 
         {/* 1. Replaceable Primary Festival Identity */}
         <div className="my-3 sm:my-6 transition-transform duration-300">
-          <YatharthLogo size="hero" customLogoUrl={logoUrl} />
+          <YatharthLogo
+            size="hero"
+            customLogoUrl={logoUrl}
+            editionName={edition?.name}
+            displayLabel={edition?.displayLabel}
+          />
         </div>
 
         {/* 2. Festival Date Status: Clean Translucent Glass Badge */}

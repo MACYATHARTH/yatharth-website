@@ -7,7 +7,7 @@ import { Clock } from "lucide-react";
 export const metadata: Metadata = {
   title: "Festival Schedule & Event Agenda Timeline",
   description:
-    "Explore the complete multi-day schedule for YATHARTH '26: Inaugural keynote, broadcast lab challenges, photojournalism rounds, media quiz, and valedictory awards.",
+    "Explore the complete multi-day schedule for YATHARTH: Inaugural keynote, broadcast lab challenges, photojournalism rounds, media quiz, and valedictory awards.",
 };
 
 export default async function SchedulePage() {

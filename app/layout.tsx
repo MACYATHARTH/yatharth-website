@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { DemoModeBadge } from "@/components/layout/DemoModeBadge";
 import { WallpaperBackground } from "@/components/layout/WallpaperBackground";
 import { Preloader } from "@/components/layout/Preloader";
-import { getActiveEdition } from "@/lib/data/edition.service";
+import { getActiveEdition, formatEditionBranding } from "@/lib/data/edition.service";
 import { getLinktreeLink } from "@/lib/data/link.service";
 import { resolveThemeTokens, tokensToCssVariables } from "@/lib/data/theme.config";
 
@@ -41,38 +41,43 @@ const cinzel = Cinzel({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "YATHARTH '26 | Annual Journalism Festival | Maharaja Agrasen College (DU)",
-    template: "%s | YATHARTH '26 — Department of Journalism, MAC DU",
-  },
-  description:
-    "Official digital platform for YATHARTH '26, the flagship annual national journalism and media festival organized by the Department of Journalism, Maharaja Agrasen College, University of Delhi.",
-  keywords: [
-    "YATHARTH 2026",
-    "YATHARTH",
-    "Department of Journalism",
-    "Maharaja Agrasen College",
-    "University of Delhi",
-    "Journalism Festival",
-    "Media Competitions",
-    "Print Journalism",
-    "Photojournalism",
-    "Broadcast Bulletin",
-    "Media Quiz",
-  ],
-  authors: [{ name: "Department of Journalism, Maharaja Agrasen College" }],
-  creator: "Department of Journalism, MAC DU",
-  openGraph: {
-    title: "YATHARTH '26 — Department of Journalism, Maharaja Agrasen College, University of Delhi",
-    description:
-      "The Annual National Journalism Festival celebrating investigative reporting, photojournalism, broadcast television, and media literacy.",
-    url: "https://yatharth.mac.du.ac.in",
-    siteName: "YATHARTH '26",
-    locale: "en_IN",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const edition = await getActiveEdition().catch(() => null);
+  const { name, displayLabel, fullBranding } = formatEditionBranding(edition);
+
+  return {
+    title: {
+      default: `${fullBranding} | Annual Journalism Festival | Maharaja Agrasen College (DU)`,
+      template: `%s | ${fullBranding} — Department of Journalism, MAC DU`,
+    },
+    description: `Official digital platform for ${fullBranding}, the flagship annual national journalism and media festival organized by the Department of Journalism, Maharaja Agrasen College, University of Delhi.`,
+    keywords: [
+      fullBranding,
+      name,
+      ...(displayLabel ? [displayLabel] : []),
+      "Department of Journalism",
+      "Maharaja Agrasen College",
+      "University of Delhi",
+      "Journalism Festival",
+      "Media Competitions",
+      "Print Journalism",
+      "Photojournalism",
+      "Broadcast Bulletin",
+      "Media Quiz",
+    ],
+    authors: [{ name: "Department of Journalism, Maharaja Agrasen College" }],
+    creator: "Department of Journalism, MAC DU",
+    openGraph: {
+      title: `${fullBranding} — Department of Journalism, Maharaja Agrasen College, University of Delhi`,
+      description:
+        "The Annual National Journalism Festival celebrating investigative reporting, photojournalism, broadcast television, and media literacy.",
+      url: "https://yatharth.mac.du.ac.in",
+      siteName: fullBranding,
+      locale: "en_IN",
+      type: "website",
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
@@ -135,7 +140,12 @@ export default async function RootLayout({
         <DemoModeBadge />
         <Navbar logoUrl={logoUrl} />
         <main className="flex-1 w-full relative z-10">{children}</main>
-        <Footer linktreeUrl={linktree?.url} logoUrl={logoUrl} />
+        <Footer
+          linktreeUrl={linktree?.url}
+          logoUrl={logoUrl}
+          editionName={edition?.name}
+          displayLabel={edition?.displayLabel}
+        />
       </body>
     </html>
   );

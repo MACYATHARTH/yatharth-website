@@ -656,7 +656,7 @@ export function AdminAnnouncementsTab({
                   required
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="e.g. YATHARTH '26 Rulebook & Guidelines Released"
+                  placeholder="e.g. Official Rulebook & Guidelines Released"
                   className="w-full px-3 py-2 bg-black/60 border border-white/15 text-white rounded-xs focus:border-[#8F3025] focus:outline-none font-sans"
                 />
               </div>

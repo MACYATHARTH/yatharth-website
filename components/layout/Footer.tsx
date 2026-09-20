@@ -5,10 +5,16 @@ import { InstagramIcon, YoutubeIcon, LinkedinIcon, TwitterIcon } from "@/compone
 export function Footer({
   linktreeUrl,
   logoUrl,
+  editionName = "YATHARTH",
+  displayLabel = "’26–27",
 }: {
   linktreeUrl?: string | null;
   logoUrl?: string | null;
+  editionName?: string;
+  displayLabel?: string | null;
 }) {
+  const fullBranding = displayLabel ? `${editionName} ${displayLabel}` : editionName;
+
   return (
     <footer className="bg-[var(--theme-surface)] text-[var(--theme-text-primary)] border-t border-[var(--theme-border)] mt-auto relative z-20 select-none">
       {/* Upper Footer */}
@@ -21,18 +27,20 @@ export function Footer({
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={logoUrl}
-                  alt="YATHARTH '26"
+                  alt={fullBranding}
                   className="h-10 sm:h-12 w-auto object-contain"
                 />
               </div>
             ) : (
               <div className="flex items-baseline gap-2">
                 <span className="font-varsity text-2xl tracking-wider text-[var(--theme-text-primary)]">
-                  YATHARTH
+                  {editionName}
                 </span>
-                <span className="font-mono text-xs tracking-wider text-[var(--theme-accent)] font-bold uppercase">
-                  &apos;26
-                </span>
+                {displayLabel && (
+                  <span className="font-mono text-xs tracking-wider text-[var(--theme-accent)] font-bold uppercase">
+                    {displayLabel}
+                  </span>
+                )}
               </div>
             )}
             <p className="text-xs text-[var(--theme-text-muted)] leading-relaxed max-w-sm font-sans font-normal">

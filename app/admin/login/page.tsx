@@ -4,8 +4,8 @@ import { getAdminSession } from "@/lib/auth/session";
 import { LoginForm } from "./LoginForm";
 
 export const metadata: Metadata = {
-  title: "Admin Portal Authentication | YATHARTH '26",
-  description: "Secure administrative login portal for YATHARTH '26 CMS.",
+  title: "Admin Portal Authentication | YATHARTH",
+  description: "Secure administrative login portal for YATHARTH CMS.",
 };
 
 export const dynamic = "force-dynamic";
