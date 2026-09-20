@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   ExternalLink,
@@ -305,39 +306,51 @@ export function EventsScrollClient({ initialEvents }: EventsScrollClientProps) {
                       }`}
                     >
                       {/* Portrait Poster (3:4 ratio) */}
-                      <div className="aspect-[3/4] rounded-sm bg-[var(--theme-surface)] border border-[var(--theme-border)] overflow-hidden relative shadow-2xl flex flex-col justify-between p-6">
-                        {/* Top tag */}
-                        <div className="flex items-center justify-between">
-                          <span className="text-[10px] font-mono text-[var(--theme-text-muted)] uppercase">
-                            #{String(idx + 1).padStart(2, "0")}
-                          </span>
-                          <span className="text-[9px] font-mono text-[var(--theme-text-muted)] uppercase tracking-widest">
-                            {event.participationType}
-                          </span>
-                        </div>
+                      <div className="aspect-[3/4] rounded-sm bg-[var(--theme-surface)] border border-[var(--theme-border)] overflow-hidden relative shadow-2xl">
+                        {event.posterUrl ? (
+                          <Image
+                            src={event.posterUrl}
+                            alt={event.title}
+                            fill
+                            sizes="290px"
+                            className="object-cover object-center"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex flex-col justify-between p-6">
+                            {/* Top tag */}
+                            <div className="flex items-center justify-between">
+                              <span className="text-[10px] font-mono text-[var(--theme-text-muted)] uppercase">
+                                #{String(idx + 1).padStart(2, "0")}
+                              </span>
+                              <span className="text-[9px] font-mono text-[var(--theme-text-muted)] uppercase tracking-widest">
+                                {event.participationType}
+                              </span>
+                            </div>
 
-                        {/* Central artistic mark / poster placeholder */}
-                        <div className="my-auto flex flex-col items-center text-center">
-                          <div
-                            className={`w-14 h-14 rounded-sm border flex items-center justify-center mb-3 transition-colors ${
-                              isActive
-                                ? "bg-[var(--theme-text-primary)] text-[var(--theme-background)] border-[var(--theme-text-primary)]"
-                                : "bg-[var(--theme-surface-secondary)] text-[var(--theme-text-muted)] border-[var(--theme-border)]"
-                            }`}
-                          >
-                            <Layers className="w-6 h-6" />
+                            {/* Central artistic mark / poster placeholder */}
+                            <div className="my-auto flex flex-col items-center text-center">
+                              <div
+                                className={`w-14 h-14 rounded-sm border flex items-center justify-center mb-3 transition-colors ${
+                                  isActive
+                                    ? "bg-[var(--theme-text-primary)] text-[var(--theme-background)] border-[var(--theme-text-primary)]"
+                                    : "bg-[var(--theme-surface-secondary)] text-[var(--theme-text-muted)] border-[var(--theme-border)]"
+                                }`}
+                              >
+                                <Layers className="w-6 h-6" />
+                              </div>
+                              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--theme-text-muted)]">
+                                {event.category}
+                              </span>
+                            </div>
+
+                            {/* Bottom title preview */}
+                            <div>
+                              <h3 className="text-base font-bold text-[var(--theme-text-primary)] leading-snug line-clamp-2">
+                                {event.title}
+                              </h3>
+                            </div>
                           </div>
-                          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--theme-text-muted)]">
-                            {event.category}
-                          </span>
-                        </div>
-
-                        {/* Bottom title preview */}
-                        <div>
-                          <h3 className="text-base font-bold text-[var(--theme-text-primary)] leading-snug line-clamp-2">
-                            {event.title}
-                          </h3>
-                        </div>
+                        )}
                       </div>
                     </div>
                   );
@@ -363,36 +376,50 @@ export function EventsScrollClient({ initialEvents }: EventsScrollClientProps) {
             className="border border-[var(--theme-border)] bg-[var(--theme-surface)]/80 backdrop-blur-md rounded-sm overflow-hidden"
           >
             {/* Portrait Poster */}
-            <div className="aspect-[3/4] bg-[var(--theme-surface-secondary)]/30 relative flex flex-col justify-between p-6 border-b border-[var(--theme-border)]">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono text-[var(--theme-text-muted)] uppercase tracking-widest">
-                  [ {String(idx + 1).padStart(2, "0")} / {String(filteredEvents.length).padStart(2, "0")} ]
-                </span>
-                <span
-                  className={`text-[9px] font-mono uppercase font-bold px-2 py-0.5 rounded-[2px] border ${
-                    event.registrationStatus === "OPEN"
-                      ? "text-[var(--theme-text-primary)] border-[var(--theme-cta)]/50 bg-[var(--theme-cta)]/20"
-                      : "text-[var(--theme-text-muted)] border-[var(--theme-border)] bg-[var(--theme-surface-secondary)]"
-                  }`}
-                >
-                  {event.registrationStatus.replace("_", " ")}
-                </span>
-              </div>
+            <div className="aspect-[3/4] bg-[var(--theme-surface-secondary)]/30 relative overflow-hidden border-b border-[var(--theme-border)]">
+              {event.posterUrl ? (
+                <Link href={`/events/${event.slug}`} className="block w-full h-full relative" aria-label={`View ${event.title}`}>
+                  <Image
+                    src={event.posterUrl}
+                    alt={event.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 600px"
+                    className="object-cover object-center"
+                  />
+                </Link>
+              ) : (
+                <div className="w-full h-full flex flex-col justify-between p-6">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono text-[var(--theme-text-muted)] uppercase tracking-widest">
+                      [ {String(idx + 1).padStart(2, "0")} / {String(filteredEvents.length).padStart(2, "0")} ]
+                    </span>
+                    <span
+                      className={`text-[9px] font-mono uppercase font-bold px-2 py-0.5 rounded-[2px] border ${
+                        event.registrationStatus === "OPEN"
+                          ? "text-[var(--theme-text-primary)] border-[var(--theme-cta)]/50 bg-[var(--theme-cta)]/20"
+                          : "text-[var(--theme-text-muted)] border-[var(--theme-border)] bg-[var(--theme-surface-secondary)]"
+                      }`}
+                    >
+                      {event.registrationStatus.replace("_", " ")}
+                    </span>
+                  </div>
 
-              <div className="my-auto flex flex-col items-center text-center py-8">
-                <div className="w-14 h-14 rounded-sm bg-[var(--theme-surface-secondary)] border border-[var(--theme-border)] flex items-center justify-center text-[var(--theme-text-primary)] mb-3">
-                  <Layers className="w-6 h-6" />
+                  <div className="my-auto flex flex-col items-center text-center py-8">
+                    <div className="w-14 h-14 rounded-sm bg-[var(--theme-surface-secondary)] border border-[var(--theme-border)] flex items-center justify-center text-[var(--theme-text-primary)] mb-3">
+                      <Layers className="w-6 h-6" />
+                    </div>
+                    <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--theme-text-muted)]">
+                      {event.category}
+                    </span>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-bold text-[var(--theme-text-primary)] leading-tight">
+                      {event.title}
+                    </h3>
+                  </div>
                 </div>
-                <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--theme-text-muted)]">
-                  {event.category}
-                </span>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-[var(--theme-text-primary)] leading-tight">
-                  {event.title}
-                </h3>
-              </div>
+              )}
             </div>
 
             {/* Event Summary & Details */}
